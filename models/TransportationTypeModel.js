@@ -1,3 +1,8 @@
+const Sequelize = require('sequelize');
+const sequelize = require('../config/db');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const Model = sequelize.define(
     'transportation_type', {
         id: {

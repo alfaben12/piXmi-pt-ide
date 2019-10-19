@@ -8,7 +8,7 @@ exports.JWTsign = function(accountid) {
 				accountid: accountid,
 				generate_at: moment().format('dddd, MMMM Do YYYY, h:mm:ss a')
 			},
-			'ZPay',
+			'adminpiXmi',
 			function(err, token) {
 				resolve(token);
 				reject('Error');
@@ -22,14 +22,11 @@ exports.JWTverify = function(req, res, next) {
 	const token = bearerHeader ? bearerHeader.split(" ")[1] : undefined
 	
 	if (token) {
-		jwt.verify(token, 'ZPay', function(err, payload) {
+		jwt.verify(token, 'adminpiXmi', function(err, payload) {
 			if (err) {
 				res.status(401).json({
 					result: false,
-					data:{
-						code: 401,
-						message: 'Invalid Signature.'
-					}
+					message: 'FAIL {invalid signature}'
 				});
 			} else {
 				req.payload = payload;

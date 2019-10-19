@@ -4,19 +4,19 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'voucher', {
+    'admin', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         name: {
-            type: Sequelize.STRING(255)
+            type: Sequelize.STRING(50)
         },
-        limit: {
-            type: Sequelize.INTEGER
+        username: {
+            type: Sequelize.STRING(50)
         },
-        description: {
+        password: {
             type: Sequelize.TEXT
         },
         createdAt: {

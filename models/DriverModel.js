@@ -31,8 +31,8 @@ const Model = sequelize.define(
         for_woman: {
             type: Sequelize.TEXT
         },
-        transportation_type: {
-            type: Sequelize.STRING(255)
+        transportation_typeid: {
+            type: Sequelize.INTEGER
         },
         address: {
             type: Sequelize.TEXT

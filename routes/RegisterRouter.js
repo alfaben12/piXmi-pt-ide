@@ -3,7 +3,7 @@ const router = express.Router();
 const RegisterController = require('../controllers/RegisterController');
 const multer = require('multer');
 const path = require('path');
-const JWT = require('../helpers/JWT');
+const JWT = require('../helpers/driver/JWT');
 
 router.post(
 	'/drivers',

@@ -1,5 +1,10 @@
+const Sequelize = require('sequelize');
+const sequelize = require('../config/db');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const Model = sequelize.define(
-    'voucher', {
+    'driver_mutation', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,

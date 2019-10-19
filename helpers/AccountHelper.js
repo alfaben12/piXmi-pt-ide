@@ -8,10 +8,21 @@ exports.getDriverAccount = async function(accountid) {
 	};
 	let orderBy = false;
 	let groupBy = false;
-	let model = 'DriverModel';
-
-	/* FETCH ZSequelize */
-	let accountData = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
+	let model = 'DriverModel'
+	let joins = [
+		[
+			{
+				'fromModel' : 'DriverModel',
+				'fromKey' : 'transportation_typeid',
+				'bridgeType' : 'belongsTo',
+				'toModel' : 'TransportationTypeModel',
+				'toKey' : 'id',
+				'attributes' : ['*'],
+				'required': true
+			}
+		]
+	];
+	let accountData = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);
 	return accountData;
 };
 

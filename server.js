@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const RegisterRouter = require('./routes/RegisterRouter');
 const LoginRouter = require('./routes/LoginRouter');
+const VoucherRouter = require('./routes/VoucherRouter');
+const TransporationTypeRouter = require('./routes/TransporationTypeRouter');
+const AccountRouter = require('./routes/AccountRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,5 +30,8 @@ app.use(function(req, res, next) {
 app.get('/', (req, res) => res.send('Hello PT. IDE!'))
 app.use('/logins', LoginRouter);
 app.use('/registers', RegisterRouter);
+app.use('/vouchers', VoucherRouter);
+app.use('/transportationtypes', TransporationTypeRouter);
+app.use('/accounts', AccountRouter);
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));

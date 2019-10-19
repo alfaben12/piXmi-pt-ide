@@ -12,4 +12,9 @@ router.post(
 	LoginController.loginUser
 );
 
+router.post(
+	'/admins',
+	LoginController.loginAdmin
+);
+
 module.exports = router;
