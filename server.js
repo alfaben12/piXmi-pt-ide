@@ -4,6 +4,7 @@ const con = require('./config/db.js');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const RegisterRouter = require('./routes/RegisterRouter');
+const LoginRouter = require('./routes/LoginRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +25,7 @@ app.use(function(req, res, next) {
 
 
 app.get('/', (req, res) => res.send('Hello PT. IDE!'))
+app.use('/logins', LoginRouter);
 app.use('/registers', RegisterRouter);
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));
