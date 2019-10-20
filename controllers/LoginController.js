@@ -31,8 +31,10 @@ module.exports = {
 			return res.status(200).json({
 				result: true,
 				message: 'OK',
-				data: jwtToken,
-				loginType: 'ADMIN'
+				data: {
+					token:jwtToken,
+					loginType: 'ADMIN'
+				}
 			});
 		}else{
 			return res.status(404).json({
@@ -69,8 +71,10 @@ module.exports = {
 			return res.status(200).json({
 				result: true,
 				message: 'OK',
-				data: jwtToken,
-				loginType: 'DRIVER'
+				data: {
+					token:jwtToken,
+					loginType: 'DRIVER'
+				}
 			});
 		}else{
 			return res.status(404).json({
@@ -107,8 +111,10 @@ module.exports = {
 			return res.status(200).json({
 				result: true,
 				message: 'OK',
-				data: jwtToken,
-				loginType: 'USER'
+				data: {
+					token:jwtToken,
+					loginType: 'DRIVER'
+				}
 			});
 		}else{
 			return res.status(404).json({
