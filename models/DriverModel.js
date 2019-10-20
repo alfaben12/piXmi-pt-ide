@@ -10,6 +10,9 @@ const Model = sequelize.define(
             primaryKey: true,
             autoIncrement: true
         },
+        shelterid: {
+            type: Sequelize.INTEGER,
+        },
         name: {
             type: Sequelize.STRING(255)
         },
@@ -62,6 +65,9 @@ const Model = sequelize.define(
             type: Sequelize.TEXT
         },
         is_verify: {
+            type: Sequelize.INTEGER
+        },
+        is_active: {
             type: Sequelize.INTEGER
         },
         createdAt: {

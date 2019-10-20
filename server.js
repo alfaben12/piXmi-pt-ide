@@ -8,6 +8,8 @@ const LoginRouter = require('./routes/LoginRouter');
 const VoucherRouter = require('./routes/VoucherRouter');
 const TransporationTypeRouter = require('./routes/TransporationTypeRouter');
 const AccountRouter = require('./routes/AccountRouter');
+const DriverPaymentRouter = require('./routes/DriverPaymentRouter');
+const ShelterRouter = require('./routes/ShelterRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,5 +35,7 @@ app.use('/registers', RegisterRouter);
 app.use('/vouchers', VoucherRouter);
 app.use('/transportationtypes', TransporationTypeRouter);
 app.use('/accounts', AccountRouter);
+app.use('/payments', DriverPaymentRouter);
+app.use('/shelters', ShelterRouter);
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));
