@@ -9,7 +9,6 @@ module.exports = {
         let name = req.body.name;
 		let username = req.body.username;
 		let password = req.body.password;
-		let token = req.body.token;
 		let activity_category = req.body.activity_category;
 		let for_woman = req.body.for_woman;
 		let transportation_type = req.body.transportation_type;
@@ -49,7 +48,6 @@ module.exports = {
             name: name,
 			username: username,
 			password: password,
-			token: token,
 			activity_category: activity_category,
 			for_woman: for_woman,
 			transportation_type: transportation_type,
@@ -90,7 +88,6 @@ module.exports = {
         let name = req.body.name;
 		let username = req.body.username;
 		let password = req.body.password;
-		let token = req.body.token;
 		let address = req.body.address;
 		let ktp_number = req.body.ktp_number;
 		let phone = req.body.phone;
@@ -123,7 +120,6 @@ module.exports = {
             name: name,
 			username: username,
 			password: password,
-			token: token,
 			address: address,
 			ktp_number: ktp_number,
 			phone: phone,

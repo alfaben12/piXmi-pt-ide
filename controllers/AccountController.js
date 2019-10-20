@@ -4,9 +4,6 @@ module.exports = {
     getDriver: async function(req, res){
         /* JWT PAYLOAD */
         let accountid = req.payload.accountid;
-		
-        /* BODY */
-        let token = req.body.token;
 
 		let account = await AccountHelper.getDriverAccount(accountid);
 
@@ -28,9 +25,6 @@ module.exports = {
     getUser: async function(req, res){
         /* JWT PAYLOAD */
         let accountid = req.payload.accountid;
-		
-        /* BODY */
-        let token = req.body.token;
 
 		let account = await AccountHelper.getUserAccount(accountid);
 
@@ -52,9 +46,6 @@ module.exports = {
     getAdmin: async function(req, res){
         /* JWT PAYLOAD */
         let accountid = req.payload.accountid;
-		
-        /* BODY */
-        let token = req.body.token;
 
 		let account = await AccountHelper.getAdminAccount(accountid);
 

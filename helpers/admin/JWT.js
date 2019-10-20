@@ -36,10 +36,7 @@ exports.JWTverify = function(req, res, next) {
 	} else {
 		res.status(401).json({
 			result: false,
-			data:{
-				code: 401,
-				message: 'Invalid Signature.'
-			}
+			message: 'FAIL {invalid signature}'
 		});
 	}
 };
