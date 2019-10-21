@@ -10,6 +10,8 @@ const TransporationTypeRouter = require('./routes/TransporationTypeRouter');
 const AccountRouter = require('./routes/AccountRouter');
 const DriverPaymentRouter = require('./routes/DriverPaymentRouter');
 const ShelterRouter = require('./routes/ShelterRouter');
+const DriverLevelRouter = require('./routes/DriverLevelRouter');
+const DriverSetupRouter = require('./routes/DriverSetupRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,5 +39,8 @@ app.use('/transportationtypes', TransporationTypeRouter);
 app.use('/accounts', AccountRouter);
 app.use('/payments', DriverPaymentRouter);
 app.use('/shelters', ShelterRouter);
+app.use('/driverlevels', DriverLevelRouter);
+app.use('/driversetups', DriverSetupRouter);
+
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));

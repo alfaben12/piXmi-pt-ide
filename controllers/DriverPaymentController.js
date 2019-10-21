@@ -12,6 +12,7 @@ module.exports = {
         /* BODY */
         let voucherid = parseInt(req.body.voucherid, 10);
 		let point_destination = req.body.point_destination;
+		let point_pickup = req.body.point_pickup;
 		let userid = req.body.userid;
         let total = parseInt(req.body.total, 10);
         let payment_number = await GlobalHelper.generateUUID();
@@ -64,6 +65,7 @@ module.exports = {
             voucherid: voucherid,
             payment_number: payment_number,
             point_destination: point_destination,
+            point_pickup: point_pickup,
             driverid: driverid,
             total: total
         }
@@ -96,7 +98,7 @@ module.exports = {
         }
 	},
 	
-	completedPayment: async function(req, res){
+	finishPayment: async function(req, res){
 		/* JWT PAYLOAD */
         let driverid = req.payload.accountid;
 		
@@ -124,18 +126,18 @@ module.exports = {
 
         /* DRIVER ACCOUNT */
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
-        let driverBalance = parseInt(accountDriver.dataValues.balance, 10);
-        let paymentTotal = parseInt(validation_payment.dataValues.total, 10);
+        let driverPoint = parseInt(accountDriver.dataValues.point, 10);
 
         let mutation_value = {
             driverid: driverid,
             credit: 0,
-            debit: paymentTotal,
-            balance: driverBalance + paymentTotal
+            debit: 1,
+            point: driverPoint + 1
         }
 
+
         let payment_value = {
-            status: 'COMPLETED'
+            status: 'FINISH'
         }
         
         let payment_where = {
@@ -144,7 +146,7 @@ module.exports = {
         };
 
         let account_value = {
-            balance: driverBalance + paymentTotal
+            point: driverPoint + 1
         }
 
         let account_where = {
@@ -155,7 +157,7 @@ module.exports = {
             transaction = await sequelize.transaction();
 
             /* UPDATE ZSequelize */
-            await ZSequelize.insertValues(mutation_value, "DriverMutationModel", transaction);
+            await ZSequelize.insertValues(mutation_value, "DriverMutationPointModel", transaction);
             await ZSequelize.updateValues(payment_value, payment_where, "DriverPaymentModel", transaction);
             await ZSequelize.updateValues(account_value, account_where, "DriverModel", transaction);
 

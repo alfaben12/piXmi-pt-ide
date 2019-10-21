@@ -2,21 +2,21 @@ const ZSequelize = require('../libraries/ZSequelize');
 const sequelize = require('../config/db');
 
 module.exports = {
-    getVoucher: async function(req, res){
+    getDriverLevel: async function(req, res){
         let field = ['*'];
         let where = false;
         let orderBy = false;
         let groupBy = false;
-        let model = 'VoucherModel'
+        let model = 'DriverLevelModel'
 
-        let voucher_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
-		if (voucher_result.result) {
+		if (level_result.result) {
 			return res.status(200).json({
 				result : true,
                 message : 'OK',
-				data: voucher_result.dataValues
+				data: level_result.dataValues
 			});
 		}else{
 			return res.status(404).json({
@@ -26,25 +26,25 @@ module.exports = {
 		}
     },
 
-    detailVoucher: async function(req, res){
-        let voucherid = req.params.voucherid;
+    detailDriverLevel: async function(req, res){
+        let levelid = req.params.levelid;
 
         let field = ['*'];
         let where = {
-            id: voucherid
+            id: levelid
         };
         let orderBy = false;
         let groupBy = false;
-        let model = 'VoucherModel'
+        let model = 'DriverLevelModel'
 
-        let voucher_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
-		if (voucher_result.result) {
+		if (level_result.result) {
 			return res.status(200).json({
                 result : true,
                 message : 'OK',
-				data: voucher_result.dataValues
+				data: level_result.dataValues
 			});
 		}else{
 			return res.status(404).json({
@@ -54,30 +54,28 @@ module.exports = {
 		}
     },
 
-    updateVoucher: async function(req, res){
+    updateDriverLevel: async function(req, res){
         /* PARAMS */
-        let voucherid = req.params.voucherid;
+        let levelid = req.params.levelid;
 
         let name = req.body.name;
-        let limit = req.body.limit;
         let description = req.body.description;
 
         /* PARAMETER ZSequelize  */
-        let voucher_value = {
+        let level_value = {
             name: name,
-            limit: limit,
             description: description
         }
 
-        let voucher_where = {
-            id: voucherid
+        let level_where = {
+            id: levelid
         };
         
         try {
             transaction = await sequelize.transaction();
 
             /* UPDATE ZSequelize */
-            let voucher_result = await ZSequelize.updateValues(voucher_value, voucher_where, "VoucherModel", transaction);
+            let level_result = await ZSequelize.updateValues(level_value, level_where, "DriverLevelModel", transaction);
 
             await transaction.commit();
 
@@ -95,10 +93,9 @@ module.exports = {
         }
     },
 
-    insertVoucher: async function(req, res){
+    insertDriverLevel: async function(req, res){
         /* BODY */
         let name = req.body.name;
-        let limit = req.body.limit;
         let description = req.body.description;
 
         /* VALIDATION */
@@ -110,7 +107,7 @@ module.exports = {
 
 		let validation_orderBy = [['id', 'DESC']];
 		let validation_groupBy = false;
-		let validation_model = 'VoucherModel';
+		let validation_model = 'DriverLevelModel';
 
 		/* FETCH ZSequelize */
 		let validation_accountData = await ZSequelize.fetch(false, validation_field, validation_where, validation_orderBy, validation_groupBy, validation_model);
@@ -123,16 +120,15 @@ module.exports = {
         }
 
         /* PARAMETER ZSequelize  */
-        let voucher_value = {
+        let level_value = {
             name: name,
-            limit: limit,
             description: description
         }
         
         try {
             transaction = await sequelize.transaction();
             /* INSERT ZSequelize */
-            let voucher_result = await ZSequelize.insertValues(voucher_value, "VoucherModel", transaction);
+            let level_result = await ZSequelize.insertValues(level_value, "DriverLevelModel", transaction);
 
             await transaction.commit();
 
@@ -150,18 +146,18 @@ module.exports = {
         }
     },
 
-    deleteVoucher: async function(req, res){
+    deleteDriverLevel: async function(req, res){
         /* PARAMS */
-        let voucherid = req.params.voucherid;
+        let levelid = req.params.levelid;
 
-        let voucher_where = {
-            id: voucherid
+        let level_where = {
+            id: levelid
         };
 
         /* UPDATE ZSequelize */
-        let voucher_result = await ZSequelize.destroyValues(voucher_where, "VoucherModel");
+        let level_result = await ZSequelize.destroyValues(level_where, "DriverLevelModel");
 
-        if (voucher_result) {
+        if (level_result) {
             /* FETCTH RESULT & CONDITION & RESPONSE */
             return res.status(201).json({
                 result : true,

@@ -123,7 +123,7 @@ module.exports = {
 		let validation_accountData = await ZSequelize.fetch(false, validation_field, validation_where, validation_orderBy, validation_groupBy, validation_model);
 
 		if (validation_accountData.dataValues != null) {
-			return res.status(200).json({
+			return res.status(409).json({
                 result : false,
 				message: "FAIL {already registered}"
 			});

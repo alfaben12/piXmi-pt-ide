@@ -13,6 +13,12 @@ const Model = sequelize.define(
         shelterid: {
             type: Sequelize.INTEGER,
         },
+        levelid: {
+            type: Sequelize.INTEGER,
+        },
+        point: {
+            type: Sequelize.INTEGER,
+        },
         name: {
             type: Sequelize.STRING(255)
         },

@@ -31,6 +31,28 @@ exports.getDriverAccount = async function(accountid) {
 				'attributes' : ['*'],
 				'required': false
 			}
+		],
+		[
+			{
+				'fromModel' : 'DriverModel',
+				'fromKey' : 'driver.id',
+				'bridgeType' : 'hasOne',
+				'toModel' : 'DriverSetupModel',
+				'toKey' : 'driverid',
+				'attributes' : ['*'],
+				'required': false
+			}
+		],
+		[
+			{
+				'fromModel' : 'DriverModel',
+				'fromKey' : 'driver.id',
+				'bridgeType' : 'hasMany',
+				'toModel' : 'DriverSetupCostModel',
+				'toKey' : 'driverid',
+				'attributes' : ['*'],
+				'required': false
+			}
 		]
 	];
 	let accountData = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);

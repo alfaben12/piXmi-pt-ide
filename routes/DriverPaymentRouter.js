@@ -10,9 +10,9 @@ router.post(
 );
 
 router.post(
-    '/drivers/vouchers/completed',
+    '/drivers/vouchers/finish',
     JWT.JWTverify,
-	DriverPaymentController.completedPayment
+	DriverPaymentController.finishPayment
 );
 
 module.exports = router;

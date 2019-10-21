@@ -4,32 +4,29 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_payment', {
+    'driver_setup_cost', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        voucherid: {
-            type: Sequelize.INTEGER
-        },
-        payment_number: {
-            type: Sequelize.TEXT
-        },
-        point_destination: {
-            type: Sequelize.TEXT
-        },
-        point_pickup: {
-            type: Sequelize.TEXT
-        },
         driverid: {
             type: Sequelize.INTEGER
         },
-        total: {
+        adminid: {
             type: Sequelize.INTEGER
         },
-        status: {
-            type: Sequelize.STRING(50)
+        from_hour: {
+            type: Sequelize.INTEGER
+        },
+        to_hour: {
+            type: Sequelize.INTEGER
+        },
+        price: {
+            type: Sequelize.INTEGER
+        },
+        point: {
+            type: Sequelize.INTEGER
         },
         createdAt: {
             type: 'TIMESTAMP',

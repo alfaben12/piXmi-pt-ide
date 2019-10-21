@@ -4,32 +4,23 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_payment', {
+    'driver_mutation_point', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        voucherid: {
-            type: Sequelize.INTEGER
-        },
-        payment_number: {
-            type: Sequelize.TEXT
-        },
-        point_destination: {
-            type: Sequelize.TEXT
-        },
-        point_pickup: {
-            type: Sequelize.TEXT
-        },
         driverid: {
             type: Sequelize.INTEGER
         },
-        total: {
+        credit: {
             type: Sequelize.INTEGER
         },
-        status: {
-            type: Sequelize.STRING(50)
+        debit: {
+            type: Sequelize.INTEGER
+        },
+        point: {
+            type: Sequelize.INTEGER
         },
         createdAt: {
             type: 'TIMESTAMP',

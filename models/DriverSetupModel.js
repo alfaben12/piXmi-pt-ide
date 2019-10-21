@@ -4,32 +4,29 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_payment', {
+    'driver_setup', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        voucherid: {
-            type: Sequelize.INTEGER
-        },
-        payment_number: {
-            type: Sequelize.TEXT
-        },
-        point_destination: {
-            type: Sequelize.TEXT
-        },
-        point_pickup: {
-            type: Sequelize.TEXT
-        },
         driverid: {
             type: Sequelize.INTEGER
         },
-        total: {
+        adminid: {
             type: Sequelize.INTEGER
         },
-        status: {
-            type: Sequelize.STRING(50)
+        limit_balance: {
+            type: Sequelize.INTEGER
+        },
+        limit_point: {
+            type: Sequelize.INTEGER
+        },
+        limit_withdraw: {
+            type: Sequelize.INTEGER
+        },
+        min_distance: {
+            type: Sequelize.INTEGER
         },
         createdAt: {
             type: 'TIMESTAMP',
@@ -47,4 +44,4 @@ const Model = sequelize.define(
     }
 );
 
-module.exports = Model;
+module.exports = Model;  
