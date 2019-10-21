@@ -11,3 +11,7 @@ exports.generateUUID = async function() { // Public Domain/MIT https://www.ietf.
     var uuid = s.join("");
     return uuid;
 }
+
+exports.inRange = function(x, min, max) { 
+    return ((x-min)*(x-max) <= 0);
+}

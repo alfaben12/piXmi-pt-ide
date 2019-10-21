@@ -120,5 +120,49 @@ module.exports = {
                 message : err
             });
         }
+    },
+
+    updateCost: async function(req, res){
+        /* PARAMS */
+        let id = req.params.driversetupid;
+
+        /* BODY */
+        let from_hour = req.body.from_hour;
+        let to_hour = req.body.to_hour;
+        let price = req.body.price;
+        let point = req.body.point;
+
+        /* PARAMETER ZSequelize  */
+        let driver_value = {
+            from_hour: from_hour,
+            to_hour: to_hour,
+            price: price,
+            point: point
+        }
+
+        let driver_where = {
+            id: id
+        };
+        
+        try {
+            transaction = await sequelize.transaction();
+
+            /* INSERT ZSequelize */
+            await ZSequelize.updateValues(driver_value, driver_where, "DriverSetupCostModel", transaction);
+
+            await transaction.commit();
+
+            /* FETCTH RESULT & CONDITION & RESPONSE */
+            return res.status(201).json({
+                result : true,
+                message : 'OK'
+            });
+        } catch (err) {
+            await transaction.rollback();
+            return res.status(400).json({
+                result : false,
+                message : err
+            });
+        }
     }
 }

@@ -15,4 +15,10 @@ router.post(
 	DriverSetupControllers.insertCost
 );
 
+router.put(
+    '/:driversetupid',
+    JWT.JWTverify,
+	DriverSetupControllers.updateCost
+);
+
 module.exports = router;

@@ -3,9 +3,12 @@ const AccountHelper = require('../helpers/AccountHelper');
 const GlobalHelper = require('../helpers/GlobalHelper');
 const Op = require('sequelize').Op;
 const sequelize = require('../config/db');
+const moment = require('moment');
 
 module.exports = {
     paymentWithVoucher: async function(req, res){
+        let hourNow = moment().format("H");
+
         /* PAYLOAD */
 		let driverid = req.payload.accountid;
 
@@ -13,8 +16,8 @@ module.exports = {
         let voucherid = parseInt(req.body.voucherid, 10);
 		let point_destination = req.body.point_destination;
 		let point_pickup = req.body.point_pickup;
-		let userid = req.body.userid;
-        let total = parseInt(req.body.total, 10);
+        let userid = req.body.userid;
+        let distance = req.body.distance;
         let payment_number = await GlobalHelper.generateUUID();
           
         /* VALIDATION */
@@ -60,6 +63,21 @@ module.exports = {
 			});
         }
 
+        /* DRIVER ACCOUNT */
+        let accountDriver = await AccountHelper.getDriverAccount(driverid);
+        let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
+
+        let price = 0;
+        driver_setup_cost.forEach(val => { 
+            let inRange = GlobalHelper.inRange(hourNow, val.from_hour, val.to_hour);
+
+            if (inRange == true) {
+                price = val.price;
+            }
+        }); 
+
+        let total = parseInt(price, 10) * parseInt(distance, 10);
+
         /* PARAMETER ZSequelize  */
         let driver_value = {
             voucherid: voucherid,
@@ -99,6 +117,8 @@ module.exports = {
 	},
 	
 	finishPayment: async function(req, res){
+        let hourNow = moment().format("H");
+
 		/* JWT PAYLOAD */
         let driverid = req.payload.accountid;
 		
@@ -126,7 +146,18 @@ module.exports = {
 
         /* DRIVER ACCOUNT */
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
-        let driverPoint = parseInt(accountDriver.dataValues.point, 10);
+        let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
+
+        let point = 0;
+        driver_setup_cost.forEach(val => { 
+            let inRange = GlobalHelper.inRange(hourNow, val.from_hour, val.to_hour);
+
+            if (inRange == true) {
+                point = val.point;
+            }
+        }); 
+
+        let driverPoint = point;
 
         let mutation_value = {
             driverid: driverid,
