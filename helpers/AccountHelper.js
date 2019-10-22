@@ -62,7 +62,7 @@ exports.getDriverAccount = async function(accountid) {
 				'toModel' : 'DriverLevelModel',
 				'toKey' : 'id',
 				'attributes' : ['*'],
-				'required': true
+				'required': false
 			}
 		],
 	];
