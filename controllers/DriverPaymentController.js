@@ -67,6 +67,14 @@ module.exports = {
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
         let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
 
+        let minDistance = parseInt(accountDriver.dataValues.driver_setup.min_distance, 10);
+        if (distance < minDistance) {
+            return res.status(200).json({
+                result : false,
+				message: "FAIL {validation distance}"
+			});
+        }
+
         let price = 0;
         driver_setup_cost.forEach(val => { 
             let inRange = GlobalHelper.inRange(hourNow, val.from_hour, val.to_hour);
