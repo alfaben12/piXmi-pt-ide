@@ -53,7 +53,18 @@ exports.getDriverAccount = async function(accountid) {
 				'attributes' : ['*'],
 				'required': false
 			}
-		]
+		],
+		[
+			{
+				'fromModel' : 'DriverModel',
+				'fromKey' : 'levelid',
+				'bridgeType' : 'belongsTo',
+				'toModel' : 'DriverLevelModel',
+				'toKey' : 'id',
+				'attributes' : ['*'],
+				'required': true
+			}
+		],
 	];
 	let accountData = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);
 	return accountData;

@@ -74,6 +74,22 @@ module.exports = {
 				message: "FAIL {validation distance}"
 			});
         }
+        
+        let dataShelter = accountDriver.dataValues.shelter;
+        if (dataShelter == null) {
+            return res.status(401).json({
+                result : false,
+				message: "FAIL {shelter not found}"
+			});
+        }
+
+        let dataLevel = accountDriver.dataValues.driver_level;
+        if (dataLevel == null) {
+            return res.status(401).json({
+                result : false,
+				message: "FAIL {level not found}"
+			});
+        }
 
         let price = 0;
         driver_setup_cost.forEach(val => { 

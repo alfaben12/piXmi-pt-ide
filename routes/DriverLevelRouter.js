@@ -31,4 +31,10 @@ router.delete(
 	DriverLevelController.deleteDriverLevel
 );
 
+router.put(
+    '/drivers/:levelid/',
+    JWT.JWTverify,
+	DriverLevelController.verifyLevelDriver
+);
+
 module.exports = router;

@@ -171,4 +171,40 @@ module.exports = {
             });
         }
     },
+
+    verifyLevelDriver: async function(req, res){
+        /* BODY */
+        let levelid = req.body.levelid;
+        let driverid = req.params.levelid;
+
+        /* PARAMETER ZSequelize  */
+        let driver_value = {
+            levelid: levelid
+        }
+
+        let driver_where = {
+            id: driverid
+        };
+        
+        try {
+            transaction = await sequelize.transaction();
+
+            /* UPDATE ZSequelize */
+            let driver_result = await ZSequelize.updateValues(driver_value, driver_where, "DriverModel", transaction);
+
+            await transaction.commit();
+
+            /* FETCTH RESULT & CONDITION & RESPONSE */
+			return res.status(200).json({
+                result : true,
+                message : 'OK'
+            });
+        } catch (err) {
+            await transaction.rollback();
+            return res.status(400).json({
+                result : false,
+                message : err
+            });
+        }
+	}
 }
