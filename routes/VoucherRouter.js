@@ -25,6 +25,12 @@ router.post(
 	VoucherController.insertVoucher
 );
 
+router.post(
+    '/generates',
+    JWT.JWTverify,
+	VoucherController.generatesInsertVoucher
+);
+
 router.delete(
     '/:voucherid',
     JWT.JWTverify,
