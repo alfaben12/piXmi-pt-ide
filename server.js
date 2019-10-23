@@ -15,6 +15,7 @@ const DriverSetupRouter = require('./routes/DriverSetupRouter');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('uploads/'));
 
 // allow request
 app.use(cors());
