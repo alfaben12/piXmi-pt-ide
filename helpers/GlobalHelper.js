@@ -25,3 +25,10 @@ exports.randomCharacter = function(length) {
     }
     return "PIXMI"+result;
 }
+
+exports.getMime = function(base64) {
+    const body = {profilepic:base64};
+    let mimeType = body.profilepic.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+    var myarr = mimeType.split("/");
+    return myarr[1];
+}
