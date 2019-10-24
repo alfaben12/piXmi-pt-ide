@@ -14,9 +14,9 @@ const DriverLevelRouter = require('./routes/DriverLevelRouter');
 const DriverSetupRouter = require('./routes/DriverSetupRouter');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.static('uploads/'));
-
+app.use(express.urlencoded({extended: true, limit:'100mb',parameterLimit:1000000 }));
 // allow request
 app.use(cors());
 app.use(function(req, res, next) {
