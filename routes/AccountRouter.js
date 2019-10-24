@@ -23,4 +23,16 @@ router.get(
 	AccountController.getAdmin
 );
 
+router.get(
+    '/alldrivers',
+    JWTAuthAdmin.JWTverify,
+	AccountController.getAllDriver
+);
+
+router.get(
+    '/allusers',
+    JWTAuthAdmin.JWTverify,
+	AccountController.getAllUser
+);
+
 module.exports = router;
