@@ -48,26 +48,71 @@ module.exports = {
         let filename_photo_profile = "photo_profile"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_profile, data_url);
 
+        let fileSize_photo_profile = GlobalHelper.getFileSize(req.body.photo_profile)
+
+        if (fileSize_photo_profile > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
+
         ba64, data_url = req.body.photo_stnk;
         let photo_stnk = "photo_stnk"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_stnk);
         let filename_photo_stnk = "photo_stnk"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_stnk, data_url);
+
+        let fileSize_photo_stnk = GlobalHelper.getFileSize(req.body.photo_stnk)
+
+        if (fileSize_photo_stnk > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
 
         ba64, data_url = req.body.photo_skck;
         let photo_skck = "photo_skck"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_skck);
         let filename_photo_skck = "photo_skck"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_skck, data_url);
 
+        let fileSize_photo_skck = GlobalHelper.getFileSize(req.body.photo_skck)
+
+        if (fileSize_photo_skck > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
+
         ba64, data_url = req.body.photo_sim;
         let photo_sim = "photo_sim"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_sim);
         let filename_photo_sim = "photo_sim"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_sim, data_url);
+
+        let fileSize_photo_sim = GlobalHelper.getFileSize(req.body.photo_sim)
+
+        if (fileSize_photo_sim > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
 
         ba64, data_url = req.body.photo_transportation;
         let photo_transportation = "photo_transportation"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_transportation);
         let filename_photo_transportation = "photo_transportation"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_transportation, data_url);
         
+        let fileSize_photo_transportation = GlobalHelper.getFileSize(req.body.photo_transportation)
+
+        if (fileSize_photo_transportation > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
+
         /* PARAMETER ZSequelize  */
         let driver_value = {
             name: name,
@@ -145,7 +190,16 @@ module.exports = {
         let photo_profile = "photo_profile"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_profile);
         let filename_photo_profile = "photo_profile"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_profile, data_url);
-        
+
+        let fileSize = GlobalHelper.getFileSize(req.body.photo_profile)
+
+        if (fileSize > 1000) {
+            return res.status(413).json({
+                result : false,
+                message: "FAIL {file to large}"
+            });
+        }
+
         /* PARAMETER ZSequelize  */
         let driver_value = {
             name: name,
