@@ -16,7 +16,7 @@ module.exports = {
         let voucherid = parseInt(req.body.voucherid, 10);
 		let point_destination = req.body.point_destination;
 		let point_pickup = req.body.point_pickup;
-        let userid = req.body.userid;
+        let userid = 1;
         let distance = req.body.distance;
         let payment_number = await GlobalHelper.generateUUID();
           

@@ -120,7 +120,7 @@ module.exports = {
             password: password,
             activity_category: activity_category,
             for_woman: for_woman,
-            transportation_type: transportation_type,
+            transportation_typeid: transportation_type,
             address: address,
             ktp_number: ktp_number,
             phone: phone,
