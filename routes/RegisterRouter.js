@@ -22,4 +22,10 @@ router.put(
 	RegisterController.verifyDriver
 );
 
+router.post(
+	'/sendCodeVerify',
+	JWT.JWTverify,
+	RegisterController.sendCodeVerify
+);
+
 module.exports = router;

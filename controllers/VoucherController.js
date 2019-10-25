@@ -214,7 +214,7 @@ module.exports = {
 
         let count = 0;
         for (let i = 0; i < many; i++) {
-            let name = await GlobalHelper.randomCharacter(10);
+            let name = await GlobalHelper.randomCharacterVoucher(10);
             /* VALIDATION */
             /* PARAMETER ZSequelize */
             let validation_field = ['*'];

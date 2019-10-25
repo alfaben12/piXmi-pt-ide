@@ -16,7 +16,7 @@ exports.inRange = function(x, min, max) {
     return ((x-min)*(x-max) <= 0);
 }
 
-exports.randomCharacter = function(length) {
+exports.randomCharacterVoucher = function(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var charactersLength = characters.length;
@@ -24,6 +24,16 @@ exports.randomCharacter = function(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return "PIXMI"+result;
+}
+
+exports.randomCharacter = function(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
 
 exports.getMime = function(base64) {

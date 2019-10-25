@@ -281,7 +281,52 @@ module.exports = {
         }
     },
     
-    uploadTest: async function(req, res){
-        
+    sendCodeVerify: async function(req, res){
+        const accountSid = 'AC5f5a33217cbd07b15e276bca1610b401';
+        const authToken = '44fd1d9fd12e89d483894b15295fa8f2';
+        const client = require('twilio')(accountSid, authToken);
+
+        /* JWT PAYLOAD */
+        let accountid = req.payload.accountid;
+
+        let token = GlobalHelper.randomCharacter(5);
+
+        /* PARAMETER ZSequelize  */
+        let account_value = {
+            token: token,
+            is_verify: 1
+        }
+
+        let account_where = {
+            id: accountid
+        };
+
+        try {
+            transaction = await sequelize.transaction();
+            
+            /* UPDATE ZSequelize */
+            let account_result = await ZSequelize.updateValues(account_value, account_where, "DriverModel", transaction);
+            
+            let account = await AccountHelper.getDriverAccount(accountid);
+
+            let phone = account.dataValues.phone;
+            client.messages
+                .create({body: 'PIXMI code '+ token + ".", from: '+12242698055', to: phone})
+                .then(message => console.log(message.sid));
+
+            await transaction.commit();
+            
+            /* FETCTH RESULT & CONDITION & RESPONSE */
+            return res.status(200).json({
+                result : true,
+                message : 'OK'
+            });
+        } catch (err) {
+            await transaction.rollback();
+            return res.status(400).json({
+                result : false,
+                message : err
+            });
+        }
     }
 }
