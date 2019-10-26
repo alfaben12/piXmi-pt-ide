@@ -5,13 +5,14 @@ const Op = require('sequelize').Op;
 const sequelize = require('../config/db');
 const ba64 = require("ba64")
 const moment = require("moment")
+const bcrypt = require('bcrypt');
 
 module.exports = {
     insertDriver: async function(req, res){
         /* BODY */
         let name = req.body.name;
         let username = req.body.username;
-        let password = req.body.password;
+        let password = bcrypt.hashSync(req.body.password, 10);
         let activity_category = req.body.activity_category;
         let for_woman = req.body.for_woman;
         let transportation_type = req.body.transportation_type;
@@ -19,7 +20,7 @@ module.exports = {
         let ktp_number = req.body.ktp_number;
         let phone = req.body.phone;
         let email = req.body.email;
-        
+
         /* VALIDATION */
         /* PARAMETER ZSequelize */
         let validation_field = ['*'];
@@ -157,7 +158,7 @@ module.exports = {
         /* BODY */
         let name = req.body.name;
         let username = req.body.username;
-        let password = req.body.password;
+        let password = bcrypt.hashSync(req.body.password, 10);
         let address = req.body.address;
         let ktp_number = req.body.ktp_number;
         let phone = req.body.phone;
