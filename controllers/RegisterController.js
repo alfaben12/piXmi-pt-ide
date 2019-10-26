@@ -5,7 +5,7 @@ const Op = require('sequelize').Op;
 const sequelize = require('../config/db');
 const ba64 = require("ba64")
 const moment = require("moment")
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     insertDriver: async function(req, res){

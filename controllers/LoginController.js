@@ -2,7 +2,7 @@ const ZSequelize = require('../libraries/ZSequelize');
 const JWTAuthDriver = require('../helpers/driver/JWT');
 const JWTAuthUser = require('../helpers/user/JWT');
 const JWTAuthAdmin = require('../helpers/admin/JWT');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
 	loginAdmin: async function(req, res) {
@@ -68,10 +68,10 @@ module.exports = {
 			});
 		}
 
-		let passwordAccount = accountData.dataValues.password;
+		let hashPasswordAccount = accountData.dataValues.password;
 
 		let passwordCompare;
-		if (bcrypt.compareSync(password, passwordAccount)) {
+		if (bcrypt.compareSync(password, hashPasswordAccount)) {
 			passwordCompare = true;
 		} else {
 			passwordCompare = false;
@@ -129,10 +129,10 @@ module.exports = {
 			});
 		}
 
-		let passwordAccount = accountData.dataValues.password;
+		let hashPasswordAccount = accountData.dataValues.password;
 
 		let passwordCompare;
-		if (bcrypt.compareSync(password, passwordAccount)) {
+		if (bcrypt.compareSync(password, hashPasswordAccount)) {
 			passwordCompare = true;
 		} else {
 			passwordCompare = false;
