@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const JWT = require('../helpers/admin/JWT');
+const JWT = require('../middlewares/admin/JWT');
 const DriverSetupControllers = require('../controllers/DriverSetupControllers');
 
 router.post(

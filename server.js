@@ -1,8 +1,8 @@
 const express = require('express')
-const app = express();
 const con = require('./config/db.js');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
 const RegisterRouter = require('./routes/RegisterRouter');
 const LoginRouter = require('./routes/LoginRouter');
 const VoucherRouter = require('./routes/VoucherRouter');
@@ -13,10 +13,13 @@ const ShelterRouter = require('./routes/ShelterRouter');
 const DriverLevelRouter = require('./routes/DriverLevelRouter');
 const DriverSetupRouter = require('./routes/DriverSetupRouter');
 
+const app = express();
+
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: true, limit:'100mb',parameterLimit:1000000 }));
 app.use(express.static('uploads/'));
+
 // allow request
 app.use(cors());
 app.use(function(req, res, next) {

@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const RegisterController = require('../controllers/RegisterController');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const JWT = require('../helpers/driver/JWT');
+const JWT = require('../middlewares/driver/JWT');
+// const formValidation = require('../middlewares/formvalidations/RegistersFormValidation');
 
 router.post(
 	'/drivers',
+	// formValidation.bodySend(),
 	RegisterController.insertDriver
 );
 

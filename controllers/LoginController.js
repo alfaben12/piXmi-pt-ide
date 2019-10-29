@@ -1,7 +1,7 @@
 const ZSequelize = require('../libraries/ZSequelize');
-const JWTAuthDriver = require('../helpers/driver/JWT');
-const JWTAuthUser = require('../helpers/user/JWT');
-const JWTAuthAdmin = require('../helpers/admin/JWT');
+const JWTAuthDriver = require('../middlewares/driver/JWT');
+const JWTAuthUser = require('../middlewares/user/JWT');
+const JWTAuthAdmin = require('../middlewares/admin/JWT');
 const bcrypt = require('bcryptjs');
 
 module.exports = {

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const AccountController = require('../controllers/AccountController');
-const JWTAuthDriver = require('../helpers/driver/JWT');
-const JWTAuthUser = require('../helpers/user/JWT');
-const JWTAuthAdmin = require('../helpers/admin/JWT');
+const JWTAuthDriver = require('../middlewares/driver/JWT');
+const JWTAuthUser = require('../middlewares/user/JWT');
+const JWTAuthAdmin = require('../middlewares/admin/JWT');
 
 router.get(
     '/drivers',

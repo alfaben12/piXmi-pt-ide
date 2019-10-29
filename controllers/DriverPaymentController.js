@@ -230,5 +230,61 @@ module.exports = {
                 message : err
             });
         }
-	}
+    },
+    
+    getMutationPoint: async function(req, res){
+		let driverid = req.payload.accountid;
+
+        let field = ['*'];
+        let where = {
+            driverid: driverid
+        };
+        let orderBy = [['id', 'DESC']];
+        let groupBy = false;
+        let model = 'DriverMutationPointModel'
+
+        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+		if (level_result.result) {
+			return res.status(200).json({
+                result : true,
+                message : 'OK',
+				data: level_result.dataValues
+			});
+		}else{
+			return res.status(404).json({
+				result : false,
+                message : 'FAIL'
+			});
+		}
+    },
+
+    getDriverPayment: async function(req, res){
+		let driverid = req.payload.accountid;
+
+        let field = ['*'];
+        let where = {
+            driverid: driverid
+        };
+        let orderBy = [['id', 'DESC']];
+        let groupBy = false;
+        let model = 'DriverPaymentModel'
+
+        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+		if (level_result.result) {
+			return res.status(200).json({
+                result : true,
+                message : 'OK',
+				data: level_result.dataValues
+			});
+		}else{
+			return res.status(404).json({
+				result : false,
+                message : 'FAIL'
+			});
+		}
+    }
 }

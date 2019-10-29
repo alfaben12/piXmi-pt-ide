@@ -260,5 +260,29 @@ module.exports = {
             result : true,
             message : 'OK'
         });
-    }
+    },
+
+    getVoucherUsed: async function(req, res){
+        let field = ['*'];
+        let where = false;
+        let orderBy = false;
+        let groupBy = false;
+        let model = 'VoucherUsedModel'
+        
+        let voucher_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+        if (voucher_result.result) {
+            return res.status(200).json({
+                result : true,
+                message : 'OK',
+                data: voucher_result.dataValues
+            });
+        }else{
+            return res.status(404).json({
+                result : false,
+                message : 'FAIL'
+            });
+        }
+    },
 }

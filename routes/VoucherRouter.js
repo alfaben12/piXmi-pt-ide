@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const JWT = require('../helpers/admin/JWT');
+const JWT = require('../middlewares/admin/JWT');
 const VoucherController = require('../controllers/VoucherController');
 
 router.get(
@@ -35,6 +35,11 @@ router.delete(
     '/:voucherid',
     JWT.JWTverify,
 	VoucherController.deleteVoucher
+);
+
+router.get(
+	'/used/all',
+	VoucherController.getVoucherUsed
 );
 
 module.exports = router;
