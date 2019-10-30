@@ -26,7 +26,7 @@ const Model = sequelize.define(
             type: Sequelize.INTEGER
         },
         min_distance: {
-            type: Sequelize.INTEGER
+            type: Sequelize.DOUBLE
         },
         createdAt: {
             type: 'TIMESTAMP',

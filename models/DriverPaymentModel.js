@@ -28,6 +28,9 @@ const Model = sequelize.define(
         total: {
             type: Sequelize.INTEGER
         },
+        distance: {
+            type: Sequelize.DOUBLE
+        },
         status: {
             type: Sequelize.STRING(50)
         },
