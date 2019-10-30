@@ -35,4 +35,10 @@ router.get(
 	AccountController.getAllUser
 );
 
+router.get(
+    '/driver/requirements',
+    JWTAuthDriver.JWTverify,
+	AccountController.checkRequirementsDriver
+);
+
 module.exports = router;

@@ -111,5 +111,61 @@ module.exports = {
                 message : 'FAIL'
 			});
 		}
+	},
+	
+	checkRequirementsDriver: async function(req, res){
+        /* JWT PAYLOAD */
+        let accountid = req.payload.accountid;
+
+		let account = await AccountHelper.getDriverAccount(accountid);
+
+		let requirements = [];
+		let transportation_type = account.dataValues.transportation_type;
+		let shelter = account.dataValues.shelter;
+		let driver_setup = account.dataValues.driver_setup;
+		let driver_setup_costs = account.dataValues.driver_setup_costs;
+		let driver_level = account.dataValues.driver_level;
+
+		if(shelter == null){
+			let shelter_req = {
+				result: false,
+				message: 'Shelter dapat ditambahkan di admin.',
+				todo: 'Login admin, tambah shelter driver'
+			}
+			requirements.push(shelter_req);
+		}
+
+		if(driver_setup == null){
+			let driver_setup_req = {
+				result: false,
+				message: 'Driver setup dapat ditambahkan di admin.',
+				todo: 'Login admin, tambah setup akun driver'
+			}
+			requirements.push(driver_setup_req);
+		}
+
+		if(driver_setup_costs == null){
+			let driver_setup_costs_req = {
+				result: false,
+				message: 'Driver setup cost dapat ditambahkan di admin, setup cost 24 jam harus ada setinganya dengan range',
+				todo: 'Login admin, tambah setup cost akun driver'
+			}
+			requirements.push(driver_setup_costs_req);
+		}
+
+		if(driver_level == null){
+			let driver_level_req = {
+				result: false,
+				message: 'Driver level dapat ditambahkan di admin.',
+				todo: 'Login admin, tambah level driver'
+			}
+			requirements.push(driver_level_req);
+		}
+
+		return res.status(200).json({
+			result : true,
+            message : 'OK',
+			data: requirements
+		});
     },
 }

@@ -49,7 +49,7 @@ module.exports = {
         if (validation_voucher.dataValues === null) {
 			return res.status(200).json({
                 result : false,
-				message: "FAIL {voucher not found}"
+				message: "Gagal, voucher tidak ditemukan"
 			});
         }
 
@@ -59,7 +59,7 @@ module.exports = {
         if (voucherLimit <= voucherUsed) {
             return res.status(200).json({
                 result : false,
-				message: "FAIL {voucher limited}"
+				message: "Maaf, voucher sudah terpakai semua"
 			});
         }
 
@@ -71,7 +71,7 @@ module.exports = {
         if (distance < minDistance) {
             return res.status(200).json({
                 result : false,
-				message: "FAIL {validation distance}"
+				message: "Maaf, jarak minimum adalah "+ minDistance +"KM"
 			});
         }
         
@@ -79,7 +79,7 @@ module.exports = {
         if (dataShelter == null) {
             return res.status(401).json({
                 result : false,
-				message: "FAIL {shelter not found}"
+				message: "Gagal, Data Shelter Driver belum ada"
 			});
         }
 
@@ -87,7 +87,7 @@ module.exports = {
         if (dataLevel == null) {
             return res.status(401).json({
                 result : false,
-				message: "FAIL {level not found}"
+				message: "Gagal, Data Level Driver tidak ada"
 			});
         }
 
@@ -129,7 +129,7 @@ module.exports = {
             /* FETCTH RESULT & CONDITION & RESPONSE */
             return res.status(201).json({
                 result : true,
-                message : 'OK',
+                message : 'Pembayaran dengan voucher berhasil',
                 data: payment_number
             });
         } catch (err) {
@@ -165,7 +165,7 @@ module.exports = {
         if (validation_payment.dataValues === null) {
 			return res.status(200).json({
                 result : false,
-				message: "FAIL {payment not found}"
+				message: "Gagal, Pembayaran dengan nomor transaksi "+ payment_number +" tidak ditemukan"
 			});
         }
 
@@ -222,7 +222,7 @@ module.exports = {
             /* FETCTH RESULT & CONDITION & RESPONSE */
 			return res.status(200).json({
                 result : true,
-                message : 'OK'
+                message : 'Berhasil, menyelesaikan pembayaran'
             });
         } catch (err) {
             await transaction.rollback();

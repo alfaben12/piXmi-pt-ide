@@ -64,7 +64,7 @@ module.exports = {
 		if (accountData.dataValues == null) {
 			return res.status(404).json({
 				result: false,
-				message: 'FAIL'
+				message: 'Akun tidak ditemukan'
 			});
 		}
 
@@ -80,7 +80,7 @@ module.exports = {
 		if (!passwordCompare) {
 			return res.status(404).json({
 				result: false,
-				message: 'FAIL'
+				message: 'Password salah'
 			});
 		}
 
@@ -101,7 +101,7 @@ module.exports = {
 		} else {
 			return res.status(404).json({
 				result: accountData.result,
-				message: 'FAIL'
+				message: 'Akun tidak ditemukan'
 			});
 		}
 	},
@@ -125,7 +125,7 @@ module.exports = {
 		if (accountData.dataValues == null) {
 			return res.status(404).json({
 				result: false,
-				message: 'FAIL'
+				message: 'Akun tidak ditemukan'
 			});
 		}
 
@@ -141,7 +141,7 @@ module.exports = {
 		if (!passwordCompare) {
 			return res.status(404).json({
 				result: false,
-				message: 'FAIL'
+				message: 'Password salah'
 			});
 		}
 
@@ -153,7 +153,7 @@ module.exports = {
 			/* SET RESPONSE */
 			return res.status(200).json({
 				result: true,
-				message: 'OK',
+				message: 'Berhasil login',
 				data: {
 					token: jwtToken,
 					loginType: 'DRIVER'
@@ -162,7 +162,7 @@ module.exports = {
 		} else {
 			return res.status(404).json({
 				result: accountData.result,
-				message: 'FAIL'
+				message: 'Akun tidak ditemukan'
 			});
 		}
 	}
