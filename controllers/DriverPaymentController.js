@@ -17,7 +17,7 @@ module.exports = {
 		let point_destination = req.body.point_destination;
 		let point_pickup = req.body.point_pickup;
         let userid = 1;
-        let distance = req.body.distance;
+        let distance = parseFloat(req.body.distance);
         let payment_number = await GlobalHelper.generateUUID();
           
         /* VALIDATION */
@@ -67,7 +67,7 @@ module.exports = {
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
         let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
 
-        let minDistance = parseInt(accountDriver.dataValues.driver_setup.min_distance, 10);
+        let minDistance = parseFloat(accountDriver.dataValues.driver_setup.min_distance, 10);
         if (distance < minDistance) {
             return res.status(200).json({
                 result : false,
@@ -100,7 +100,7 @@ module.exports = {
             }
         }); 
 
-        let total = parseInt(price, 10) * parseInt(distance, 10);
+        let total = parseInt(price, 10) * distance;
 
         /* PARAMETER ZSequelize  */
         let driver_value = {
@@ -109,7 +109,8 @@ module.exports = {
             point_destination: point_destination,
             point_pickup: point_pickup,
             driverid: driverid,
-            total: total
+            total: total,
+            distance: distance
         }
 
         let voucher_value = {
