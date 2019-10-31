@@ -4,31 +4,22 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'admin', {
+    'admin_role', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        roleid: {
-            type: Sequelize.INTEGER
-        },
-        shelterid: {
-            type: Sequelize.INTEGER
-        },
         name: {
-            type: Sequelize.STRING(10)
+            type: Sequelize.STRING(255)
         },
-        address: {
+        resource: {
             type: Sequelize.TEXT
         },
-        phone: {
-            type: Sequelize.STRING(50)
+        method: {
+            type: Sequelize.TEXT
         },
-        username: {
-            type: Sequelize.STRING(50)
-        },
-        password: {
+        description: {
             type: Sequelize.TEXT
         },
         createdAt: {

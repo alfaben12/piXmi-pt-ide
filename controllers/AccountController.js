@@ -70,16 +70,32 @@ module.exports = {
         let where = false;
         let orderBy = false;
         let groupBy = false;
-        let model = 'DriverModel'
+        let model = 'AdminModel'
 
         let account = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
+		let admin_shelterid = account.dataValues[0].shelterid;
+		let byShelter_field = ['*'];
+        let byShelter_where;
+		if (admin_shelterid == null) {
+			byShelter_where = false;
+		}else{
+			byShelter_where = {
+				shelterid: admin_shelterid
+			};
+		}
+        let byShelter_orderBy = false;
+        let byShelter_groupBy = false;
+        let byShelter_model = 'DriverModel'
+
+		let byShelter_account = await ZSequelize.fetch(true, byShelter_field, byShelter_where, byShelter_orderBy, byShelter_groupBy, byShelter_model);
+		
         /* FETCTH RESULT & CONDITION & RESPONSE */
-		if (account.result) {
+		if (byShelter_account.result) {
 			return res.status(200).json({
 				result : true,
                 message : 'OK',
-				data: account.dataValues
+				data: byShelter_account.dataValues
 			});
 		}else{
 			return res.status(404).json({

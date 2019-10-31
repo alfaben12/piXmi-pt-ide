@@ -84,3 +84,30 @@ exports.getUserAccount = async function(accountid) {
 	let accountData = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 	return accountData;
 };
+
+
+exports.getAdminAccount = async function(accountid) {
+	/* PARAMETER ZSequelize */
+	let field = ['*'];
+	let where = {
+		id: accountid
+	};
+	let orderBy = false;
+	let groupBy = false;
+	let model = 'AdminModel'
+	let joins = [
+		[
+			{
+				'fromModel' : 'AdminRoleModel',
+				'fromKey' : 'roleid',
+				'bridgeType' : 'belongsTo',
+				'toModel' : 'AdminRoleModel',
+				'toKey' : 'id',
+				'attributes' : ['*'],
+				'required': true
+			}
+		]
+	];
+	let accountData = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);
+	return accountData;
+};

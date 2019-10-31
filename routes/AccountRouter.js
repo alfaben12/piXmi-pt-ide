@@ -4,6 +4,7 @@ const AccountController = require('../controllers/AccountController');
 const JWTAuthDriver = require('../middlewares/driver/JWT');
 const JWTAuthUser = require('../middlewares/user/JWT');
 const JWTAuthAdmin = require('../middlewares/admin/JWT');
+const AccessDriver = require('../middlewares/admin/AccessDriver');
 
 router.get(
     '/drivers',
