@@ -27,4 +27,16 @@ router.get(
     DriverPaymentController.getDriverPayment
 );
 
+router.get(
+    '/driver/:payment_number/payment_number',
+    JWT.JWTverify,
+    DriverPaymentController.getDriverPaymentByTransactionNumber
+);
+
+router.post(
+    '/driver/check_total',
+    JWT.JWTverify,
+    DriverPaymentController.getDriverPaymentTotal
+);
+
 module.exports = router;

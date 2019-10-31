@@ -83,7 +83,7 @@ module.exports = {
 			});
         }
 
-        let dataLevel = accountDriver.dataValues.driver_level;
+        let dataLevel = accountDriver.dataValues.driver_payment;
         if (dataLevel == null) {
             return res.status(401).json({
                 result : false,
@@ -244,14 +244,14 @@ module.exports = {
         let groupBy = false;
         let model = 'DriverMutationPointModel'
 
-        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
-		if (level_result.result) {
+		if (payment_result.result) {
 			return res.status(200).json({
                 result : true,
                 message : 'OK',
-				data: level_result.dataValues
+				data: payment_result.dataValues
 			});
 		}else{
 			return res.status(404).json({
@@ -272,14 +272,14 @@ module.exports = {
         let groupBy = false;
         let model = 'DriverPaymentModel'
 
-        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
-		if (level_result.result) {
+		if (payment_result.result) {
 			return res.status(200).json({
                 result : true,
                 message : 'OK',
-				data: level_result.dataValues
+				data: payment_result.dataValues
 			});
 		}else{
 			return res.status(404).json({
@@ -287,5 +287,70 @@ module.exports = {
                 message : 'FAIL'
 			});
 		}
+    },
+
+    getDriverPaymentByTransactionNumber: async function(req, res){
+		let driverid = req.payload.accountid;
+		let payment_number = req.params.payment_number;
+
+        let field = ['*'];
+        let where = {
+            driverid: driverid,
+            payment_number: payment_number
+        };
+        let orderBy = [['id', 'DESC']];
+        let groupBy = false;
+        let model = 'DriverPaymentModel'
+
+        let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+		if (payment_result.result) {
+			return res.status(200).json({
+                result : true,
+                message : 'OK',
+				data: payment_result.dataValues
+			});
+		}else{
+			return res.status(404).json({
+				result : false,
+                message : 'FAIL'
+			});
+		}
+    },
+
+    getDriverPaymentTotal: async function(req, res){
+        let hourNow = moment().format("H");
+
+		let driverid = req.payload.accountid;
+		let distance = parseFloat(req.body.distance);
+
+        /* DRIVER ACCOUNT */
+        let accountDriver = await AccountHelper.getDriverAccount(driverid);
+        let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
+        
+        if (driver_setup_cost.length == 0 || driver_setup_cost == null) {
+            return res.status(404).json({
+                result : true,
+                message : 'Gagal, Driver Cost belum disetting'
+            });
+        }
+        
+        let price = 0;
+        driver_setup_cost.forEach(val => { 
+            let inRange = GlobalHelper.inRange(hourNow, val.from_hour, val.to_hour);
+
+            if (inRange == true) {
+                price = val.price;
+            }
+        }); 
+
+        let total = parseInt(price, 10) * distance;
+
+	    return res.status(200).json({
+            result : true,
+            message : 'OK',
+	    	data: total
+	    });
     }
 }
