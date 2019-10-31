@@ -12,6 +12,7 @@ const DriverPaymentRouter = require('./routes/DriverPaymentRouter');
 const ShelterRouter = require('./routes/ShelterRouter');
 const DriverLevelRouter = require('./routes/DriverLevelRouter');
 const DriverSetupRouter = require('./routes/DriverSetupRouter');
+const AdminRouter = require('./routes/AdminRouter');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use('/payments', DriverPaymentRouter);
 app.use('/shelters', ShelterRouter);
 app.use('/driverlevels', DriverLevelRouter);
 app.use('/driversetups', DriverSetupRouter);
+app.use('/admins', AdminRouter);
 
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));

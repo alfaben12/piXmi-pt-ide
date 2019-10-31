@@ -25,10 +25,10 @@ exports.accessCheckWithParam = async function(req, res, next) {
 
     let driver_shelterid = driverAccountData.dataValues.shelterid;
     let admin_shelterid = adminAccountData.dataValues.shelterid;
-    
-    if (admin_shelterid == null) {
+
+    if (admin_shelterid == null || admin_shelterid == 0) {
         next();
-    }else if (admin_shelterid != null && admin_shelterid != driver_shelterid) {
+    }else if (admin_shelterid != null || admin_shelterid != 0 && admin_shelterid != driver_shelterid) {
         res.status(403).json({
 			result: false,
 			message: 'Akses ditolak'
