@@ -98,7 +98,7 @@ exports.getAdminAccount = async function(accountid) {
 	let joins = [
 		[
 			{
-				'fromModel' : 'AdminRoleModel',
+				'fromModel' : 'AdminModel',
 				'fromKey' : 'roleid',
 				'bridgeType' : 'belongsTo',
 				'toModel' : 'AdminRoleModel',
