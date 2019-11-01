@@ -94,7 +94,6 @@ module.exports = {
 
         let dataLevel = accountDriver.dataValues.driver_level;
 
-        return console.log(dataLevel)
         if (dataLevel == null) {
             return res.status(401).json({
                 result : false,
