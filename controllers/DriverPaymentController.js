@@ -65,6 +65,15 @@ module.exports = {
 
         /* DRIVER ACCOUNT */
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
+        let driver_setup = accountDriver.dataValues.driver_setup;
+
+        if (driver_setup == null) {
+            return res.status(200).json({
+                result : false,
+				message: "Driver belum di setup"
+			});
+        }
+        
         let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
 
         let minDistance = parseFloat(accountDriver.dataValues.driver_setup.min_distance, 10);
