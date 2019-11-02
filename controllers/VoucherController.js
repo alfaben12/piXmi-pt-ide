@@ -300,6 +300,13 @@ module.exports = {
         
         let voucher_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
+        if (!voucher_result.result) {
+            return res.status(200).json({
+                result : failed,
+                message : 'Voucher tidak ditemukan',
+            });
+        }
+
         let used_field = ['*'];
         let used_where = {
             voucherid: voucherid
