@@ -76,6 +76,15 @@ module.exports = {
         
         let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
 
+        let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
+        
+        if (driver_setup_cost.length == 0 || driver_setup_cost == null) {
+            return res.status(404).json({
+                result : true,
+                message : 'Gagal, Driver Cost belum disetting'
+            });
+        }
+        
         let minDistance = parseFloat(accountDriver.dataValues.driver_setup.min_distance, 10);
         if (distance < minDistance) {
             return res.status(200).json({

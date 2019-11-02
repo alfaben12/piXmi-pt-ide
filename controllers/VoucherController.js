@@ -285,4 +285,48 @@ module.exports = {
             });
         }
     },
+
+    getVoucherRemaining: async function(req, res){
+        /* params */
+        let voucherid = req.params.voucherid;
+
+        let field = ['*'];
+        let where = {
+            id: voucherid
+        };
+        let orderBy = false;
+        let groupBy = false;
+        let model = 'VoucherModel'
+        
+        let voucher_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
+
+        let used_field = ['*'];
+        let used_where = {
+            voucherid: voucherid
+        };
+        let used_orderBy = false;
+        let used_groupBy = false;
+        let used_model = 'VoucherUsedModel'
+        
+        let voucher_used_result = await ZSequelize.fetch(true, used_field, used_where, used_orderBy, used_groupBy, used_model);
+        
+        let remaining = voucher_result.dataValues.limit - voucher_used_result.dataValues.length;
+        
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+        if (voucher_result.result) {
+            return res.status(200).json({
+                result : true,
+                message : 'OK',
+                data: {
+                    voucher: voucher_result.dataValues,
+                    remaining: remaining
+                }
+            });
+        }else{
+            return res.status(404).json({
+                result : false,
+                message : 'FAIL'
+            });
+        }
+    },
 }

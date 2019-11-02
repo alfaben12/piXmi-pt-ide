@@ -42,4 +42,9 @@ router.get(
 	VoucherController.getVoucherUsed
 );
 
+router.get(
+	'/:voucherid/remaining',
+	VoucherController.getVoucherRemaining
+);
+
 module.exports = router;
