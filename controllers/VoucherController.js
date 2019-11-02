@@ -302,7 +302,7 @@ module.exports = {
 
         if (!voucher_result.result) {
             return res.status(200).json({
-                result : failed,
+                result : false,
                 message : 'Voucher tidak ditemukan',
             });
         }
