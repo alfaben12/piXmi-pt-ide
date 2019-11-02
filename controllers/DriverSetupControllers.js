@@ -164,5 +164,26 @@ module.exports = {
                 message : err
             });
         }
+    },
+
+    getAccountDriver: async function(req, res){
+       /* JWT PAYLOAD */
+		let accountid = req.params.driverid;
+		
+		let account = await AccountHelper.getDriverAccount(accountid);
+		
+		/* FETCTH RESULT & CONDITION & RESPONSE */
+		if (account.result) {
+			return res.status(200).json({
+				result : true,
+				message : 'OK',
+				data: account.dataValues
+			});
+		}else{
+			return res.status(404).json({
+				result : false,
+				message : 'FAIL'
+			});
+		}
     }
 }

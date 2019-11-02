@@ -25,4 +25,11 @@ router.put(
 	DriverSetupControllers.updateCost
 );
 
+
+router.get(
+    '/:driverid',
+    JWT.JWTverify,
+	DriverSetupControllers.getAccountDriver
+);
+
 module.exports = router;
