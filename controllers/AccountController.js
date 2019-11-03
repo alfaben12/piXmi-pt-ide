@@ -76,7 +76,6 @@ module.exports = {
 		
 		let admin_shelterid = account.dataValues[0].shelterid;
 		let byShelter_field = ['*'];
-		let byShelter_where;
 		if (admin_shelterid == null) {
 			byShelter_where = false;
 		}else{
@@ -87,8 +86,64 @@ module.exports = {
 		let byShelter_orderBy = false;
 		let byShelter_groupBy = false;
 		let byShelter_model = 'DriverModel'
-		
-		let byShelter_account = await ZSequelize.fetch(true, byShelter_field, byShelter_where, byShelter_orderBy, byShelter_groupBy, byShelter_model);
+		let byShelter_joins = [
+			[
+				{
+					'fromModel' : 'DriverModel',
+					'fromKey' : 'transportation_typeid',
+					'bridgeType' : 'belongsTo',
+					'toModel' : 'TransportationTypeModel',
+					'toKey' : 'id',
+					'attributes' : ['*'],
+					'required': true
+				}
+			],
+			[
+				{
+					'fromModel' : 'DriverModel',
+					'fromKey' : 'shelterid',
+					'bridgeType' : 'belongsTo',
+					'toModel' : 'ShelterModel',
+					'toKey' : 'id',
+					'attributes' : ['*'],
+					'required': false
+				}
+			],
+			[
+				{
+					'fromModel' : 'DriverModel',
+					'fromKey' : 'driver.id',
+					'bridgeType' : 'hasOne',
+					'toModel' : 'DriverSetupModel',
+					'toKey' : 'driverid',
+					'attributes' : ['*'],
+					'required': false
+				}
+			],
+			[
+				{
+					'fromModel' : 'DriverModel',
+					'fromKey' : 'driver.id',
+					'bridgeType' : 'hasMany',
+					'toModel' : 'DriverSetupCostModel',
+					'toKey' : 'driverid',
+					'attributes' : ['*'],
+					'required': false
+				}
+			],
+			[
+				{
+					'fromModel' : 'DriverModel',
+					'fromKey' : 'levelid',
+					'bridgeType' : 'belongsTo',
+					'toModel' : 'DriverLevelModel',
+					'toKey' : 'id',
+					'attributes' : ['*'],
+					'required': false
+				}
+			],
+		];
+		let byShelter_account = await ZSequelize.fetchJoins(true, byShelter_field, byShelter_where, byShelter_orderBy, byShelter_groupBy, byShelter_model, byShelter_joins);
 		
 		/* FETCTH RESULT & CONDITION & RESPONSE */
 		if (byShelter_account.result) {
