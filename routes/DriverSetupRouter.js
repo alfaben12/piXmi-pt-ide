@@ -19,7 +19,7 @@ router.post(
 );
 
 router.put(
-    '/:driversetupid',
+    '/:driversetupid/driverid/:driverid',
     JWT.JWTverify,
     AccessDriver.accessCheckWithParam,
 	DriverSetupControllers.updateCost
@@ -30,6 +30,13 @@ router.get(
     '/:driverid',
     JWT.JWTverify,
 	DriverSetupControllers.getAccountDriver
+);
+
+router.delete(
+    '/:driversetupid/driverid/:driverid',
+    JWT.JWTverify,
+    AccessDriver.accessCheckWithParam,
+	DriverSetupControllers.deleteCost
 );
 
 module.exports = router;

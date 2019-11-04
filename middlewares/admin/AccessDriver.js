@@ -23,7 +23,21 @@ exports.accessCheckWithParam = async function(req, res, next) {
 	let driverAccountData = await ZSequelize.fetch(false, field, where_driver, orderBy, groupBy, model_driver);
 	let adminAccountData = await ZSequelize.fetch(false, field, where_admin, orderBy, groupBy, model_admin);
 
+    if (!driverAccountData) {
+        return res.status(401).json({
+            result : false,
+            message: "Gagal, Akun tidak ditemukan"
+        });
+    }
+
     let driver_shelterid = driverAccountData.dataValues.shelterid;
+    if (driver_shelterid == null) {
+        return res.status(401).json({
+            result : false,
+            message: "Gagal, Data Shelter Driver belum ada"
+        });
+    }
+
     let admin_shelterid = adminAccountData.dataValues.shelterid;
 
     if (admin_shelterid == null || admin_shelterid == 0) {

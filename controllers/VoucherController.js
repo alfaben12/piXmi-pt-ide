@@ -171,7 +171,6 @@ module.exports = {
                 message : 'OK'
             });
         } else {
-            await transaction.rollback();
             return res.status(400).json({
                 result : false,
                 message : err
