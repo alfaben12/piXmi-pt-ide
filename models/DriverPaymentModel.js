@@ -22,6 +22,9 @@ const Model = sequelize.define(
         point_pickup: {
             type: Sequelize.TEXT
         },
+        address_destination: {
+            type: Sequelize.TEXT
+        },
         driverid: {
             type: Sequelize.INTEGER
         },

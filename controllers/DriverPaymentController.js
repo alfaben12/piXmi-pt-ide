@@ -19,6 +19,7 @@ module.exports = {
         let userid = 1;
         let distance = parseFloat(req.body.distance);
         let payment_number = await GlobalHelper.generateUUID();
+        let address_destination = req.body.address_destination;
           
         /* VALIDATION */
         /* PARAMETER ZSequelize */
@@ -127,12 +128,13 @@ module.exports = {
             point_pickup: point_pickup,
             driverid: driverid,
             total: total,
-            distance: distance
+            distance: distance,
+            address_destination: address_destination
         }
 
         let voucher_value = {
             voucherid: voucherid,
-            userid: userid,
+            userid: 1,
         }
         
         try {
@@ -205,7 +207,7 @@ module.exports = {
             driverid: driverid,
             credit: 0,
             debit: 1,
-            point: driverPoint + 1
+            point: driverPoint
         }
 
 
@@ -219,7 +221,7 @@ module.exports = {
         };
 
         let account_value = {
-            point: driverPoint + 1
+            point: accountDriver.dataValues.point + driverPoint
         }
 
         let account_where = {
@@ -346,6 +348,13 @@ module.exports = {
         let accountDriver = await AccountHelper.getDriverAccount(driverid);
         let driver_setup_cost = accountDriver.dataValues.driver_setup_costs;
         
+        let minDistance = parseFloat(accountDriver.dataValues.driver_setup.min_distance, 10);
+        if (distance < minDistance) {
+            return res.status(200).json({
+                result : false,
+				message: "Maaf, jarak minimum adalah "+ minDistance +"KM"
+			});
+        }
         if (driver_setup_cost.length == 0 || driver_setup_cost == null) {
             return res.status(404).json({
                 result : true,
@@ -354,20 +363,26 @@ module.exports = {
         }
         
         let price = 0;
+        let point = 0;
         driver_setup_cost.forEach(val => { 
             let inRange = GlobalHelper.inRange(hourNow, val.from_hour, val.to_hour);
 
             if (inRange == true) {
                 price = val.price;
+                point = val.point;
             }
         }); 
 
-        let total = parseInt(price, 10) * distance;
+        price = parseInt(price, 10) * distance;
+        point = parseInt(point, 10);
 
 	    return res.status(200).json({
             result : true,
             message : 'OK',
-	    	data: total
+	    	data: {
+                price: price,
+                point: point
+            }
 	    });
     }
 }
