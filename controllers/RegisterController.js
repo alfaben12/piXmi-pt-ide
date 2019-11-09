@@ -38,7 +38,7 @@ module.exports = {
         if (validation_accountData.result) {
             return res.status(409).json({
                 result : false,
-                message: "FAIL {already registered}"
+                message: "Maaf, email/username sudah terdaftar"
             });
         }
 
@@ -54,7 +54,7 @@ module.exports = {
         if (fileSize_photo_profile > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 
@@ -68,7 +68,7 @@ module.exports = {
         if (fileSize_photo_stnk > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 
@@ -82,7 +82,7 @@ module.exports = {
         if (fileSize_photo_skck > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 
@@ -96,7 +96,7 @@ module.exports = {
         if (fileSize_photo_sim > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 
@@ -110,7 +110,7 @@ module.exports = {
         if (fileSize_photo_transportation > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 
@@ -181,7 +181,7 @@ module.exports = {
         if (validation_accountData.dataValues != null) {
             return res.status(409).json({
                 result : false,
-                message: "FAIL {already registered}"
+                message: "Maaf, email/username sudah terdaftar"
             });
         }
         
@@ -197,7 +197,7 @@ module.exports = {
         if (fileSize > 1000) {
             return res.status(413).json({
                 result : false,
-                message: "FAIL {file to large}"
+                message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
 

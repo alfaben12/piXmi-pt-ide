@@ -18,11 +18,10 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-				message : 'FAIL'
+				message : 'Gagal, Driver tidak ditemukan'
 			});
 		}
 	},
-	
 	getUser: async function(req, res){
 		/* JWT PAYLOAD */
 		let accountid = req.payload.accountid;
@@ -39,11 +38,10 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-				message : 'FAIL'
+				message : 'Gagal, User tidak ditemukan'
 			});
 		}
 	},
-	
 	getAdmin: async function(req, res){
 		/* JWT PAYLOAD */
 		let accountid = req.payload.accountid;
@@ -155,7 +153,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-				message : 'FAIL'
+				message : 'Gagal, Driver tidak ditemukan'
 			});
 		}
 	},
@@ -179,7 +177,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-				message : 'FAIL'
+				message : 'Gagal, User tidak ditemukan'
 			});
 		}
 	},

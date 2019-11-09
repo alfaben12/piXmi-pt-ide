@@ -40,7 +40,7 @@ module.exports = {
 		} else {
 			return res.status(404).json({
 				result: accountData.result,
-				message: 'FAIL'
+				message: 'Gagal, Admin tidak ditemukan'
 			});
 		}
 	},
@@ -156,7 +156,7 @@ module.exports = {
 				message: 'Berhasil login',
 				data: {
 					token: jwtToken,
-					loginType: 'DRIVER'
+					loginType: 'USER'
 				}
 			});
 		} else {

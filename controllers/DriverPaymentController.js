@@ -275,7 +275,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-                message : 'FAIL'
+                message : 'Gagal, Mutasi Point tidak ada'
 			});
 		}
     },
@@ -303,7 +303,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-                message : 'FAIL'
+                message : 'Gagal, Pembayaran tidak ada'
 			});
 		}
     },
@@ -333,7 +333,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-                message : 'FAIL'
+                message : 'Gagal, pembayaran dengan no transaksi '+ payment_number + ' tidak ditemukan' 
 			});
 		}
     },

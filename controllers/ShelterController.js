@@ -125,7 +125,7 @@ module.exports = {
 		if (validation_accountData.dataValues != null) {
 			return res.status(409).json({
                 result : false,
-				message: "FAIL {already registered}"
+				message: "Maaf, Shelter sudah terdaftar"
 			});
         }
 

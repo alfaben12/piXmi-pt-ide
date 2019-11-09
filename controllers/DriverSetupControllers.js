@@ -184,7 +184,7 @@ module.exports = {
         }else{
             return res.status(404).json({
                 result : false,
-                message : 'FAIL'
+                message : 'Gagal, Driver tidak ditemukan'
             });
         }
     },
@@ -210,7 +210,7 @@ module.exports = {
         } else {
             return res.status(400).json({
                 result : false,
-                message : 'Gagal'
+                message : 'Gagal, Driver Cost tidak ditemukan'
             });
         }
     },

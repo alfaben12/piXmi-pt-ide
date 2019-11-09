@@ -207,7 +207,7 @@ module.exports = {
         if (validation_day_voucher.dataValues != null) {
             return res.status(409).json({
                 result : false,
-                message: "FAIL {already registered voucher today}"
+                message: "Maaf, Voucher sudah terdaftar"
             });
         }
 
@@ -231,7 +231,7 @@ module.exports = {
             if (validation_accountData.dataValues != null) {
                 return res.status(409).json({
                     result : false,
-                    message: "FAIL {already registered, success count "+ count +"}"
+                    message: "Maaf, Voucher sudah terdaftar, sukses menambah "+ count
                 });
             }
             
@@ -280,7 +280,7 @@ module.exports = {
         }else{
             return res.status(404).json({
                 result : false,
-                message : 'FAIL'
+                message : 'Gagal, Voucher tidak ditemukan'
             });
         }
     },

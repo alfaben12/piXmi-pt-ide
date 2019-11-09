@@ -21,7 +21,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-                message : 'FAIL'
+                message : 'Gagal, Transportation Type tidak ditemukan'
 			});
 		}
     },
@@ -49,7 +49,7 @@ module.exports = {
 		}else{
 			return res.status(404).json({
 				result : false,
-                message : 'FAIL'
+                message : 'Gagal, Transportation Type tidak ditemukan'
 			});
 		}
     },
@@ -118,7 +118,7 @@ module.exports = {
 		if (validation_accountData.dataValues != null) {
 			return res.status(409).json({
                 result : false,
-				message: "FAIL {already registered}"
+				message: "Maaf, Transporation Type sudah terdaftar"
 			});
         }
 

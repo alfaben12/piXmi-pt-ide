@@ -40,6 +40,10 @@ const Model = sequelize.define(
         photo_profile: {
             type: Sequelize.TEXT
         },
+        is_verify: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0,
+        },
         createdAt: {
             type: 'TIMESTAMP',
             defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
