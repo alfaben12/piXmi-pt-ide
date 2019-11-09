@@ -14,6 +14,7 @@ const DriverLevelRouter = require('./routes/DriverLevelRouter');
 const DriverSetupRouter = require('./routes/DriverSetupRouter');
 const AdminRouter = require('./routes/AdminRouter');
 const AdminRoleRouter = require('./routes/AdminRoleRouter');
+const UserRouter = require('./routes/UserRouter');
 
 const app = express();
 
@@ -49,6 +50,16 @@ app.use('/driverlevels', DriverLevelRouter);
 app.use('/driversetups', DriverSetupRouter);
 app.use('/admins', AdminRouter);
 app.use('/adminroles', AdminRoleRouter);
+app.use('/users', UserRouter);
 
+app.get('/a', (req, res, next) => {
+    res.send({ name: 'what', status: 'yesss' });
+    next();
+})
+
+app.get('/ba/:id', (req, res, next) => {
+    res.send({ discussion: req.params.id });
+    next();
+});
 
 app.listen(process.env.RUN_PORT, () => console.log(`Example app listening on port ` + process.env.RUN_PORT));
