@@ -4,48 +4,32 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'user', {
+    'user_subscription_setup', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        user_subscription_categoryid: {
-            type: Sequelize.INTEGER
-        },
-        name: {
-            type: Sequelize.STRING(255)
-        },
-        balance: {
-            type: Sequelize.INTEGER
-        },
-        username: {
-            type: Sequelize.STRING(255)
-        },
-        password: {
-            type: Sequelize.TEXT
-        },
-        token: {
-            type: Sequelize.TEXT
-        },
-        address: {
-            type: Sequelize.TEXT
-        },
-        ktp_number: {
-            type: Sequelize.TEXT
-        },
-        phone: {
-            type: Sequelize.TEXT
-        },
-        email: {
-            type: Sequelize.TEXT
-        },
-        photo_profile: {
-            type: Sequelize.TEXT
-        },
-        is_verify: {
+        userid: {
             type: Sequelize.INTEGER,
-            defaultValue: 0,
+        },
+        dropoffAt: {
+            type: Sequelize.STRING(10)
+        },
+        pickupAt: {
+            type: Sequelize.STRING(10)
+        },
+        dropoff_address: {
+            type: Sequelize.TEXT
+        },
+        dropoff_point: {
+            type: Sequelize.TEXT
+        },
+        pickup_address: {
+            type: Sequelize.TEXT
+        },
+        pickup_point: {
+            type: Sequelize.TEXT
         },
         createdAt: {
             type: 'TIMESTAMP',
