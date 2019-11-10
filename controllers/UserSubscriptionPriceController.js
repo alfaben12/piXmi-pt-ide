@@ -5,21 +5,33 @@ const Op = require('sequelize').Op;
 const moment = require('moment');
 
 module.exports = {
-    getUSC: async function(req, res){
+    getUSP: async function(req, res){
         let field = ['*'];
         let where = false;
         let orderBy = false;
         let groupBy = false;
-        let model = 'UserSubscriptionCategoryModel'
-        
-        let usc_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let model = 'UserSubscriptionPriceModel'
+        let joins = [
+            [
+                {
+                    'fromModel' : 'UserSubscriptionPriceModel',
+                    'fromKey' : 'user_subscription_categoryid',
+                    'bridgeType' : 'belongsTo',
+                    'toModel' : 'UserSubscriptionCategoryModel',
+                    'toKey' : 'id',
+                    'attributes' : ['*'],
+                    'required': true
+                }
+            ],
+        ];
+        let usp_result = await ZSequelize.fetchJoins(true, field, where, orderBy, groupBy, model, joins);
         
         /* FETCTH RESULT & CONDITION & RESPONSE */
-        if (usc_result.result) {
+        if (usp_result.result) {
             return res.status(200).json({
                 result : true,
                 message : 'OK',
-                data: usc_result.dataValues
+                data: usp_result.dataValues
             });
         }else{
             return res.status(404).json({
@@ -29,25 +41,37 @@ module.exports = {
         }
     },
     
-    detailUSC: async function(req, res){
-        let uscid = req.params.uscid;
+    detailUSP: async function(req, res){
+        let uspid = req.params.uspid;
         
         let field = ['*'];
         let where = {
-            id: uscid
+            id: uspid
         };
         let orderBy = false;
         let groupBy = false;
-        let model = 'UserSubscriptionCategoryModel'
-        
-        let usc_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
+        let model = 'UserSubscriptionPriceModel'
+        let joins = [
+            [
+                {
+                    'fromModel' : 'UserSubscriptionPriceModel',
+                    'fromKey' : 'user_subscription_categoryid',
+                    'bridgeType' : 'belongsTo',
+                    'toModel' : 'UserSubscriptionCategoryModel',
+                    'toKey' : 'id',
+                    'attributes' : ['*'],
+                    'required': true
+                }
+            ],
+        ];
+        let usp_result = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);
         
         /* FETCTH RESULT & CONDITION & RESPONSE */
-        if (usc_result.result) {
+        if (usp_result.result) {
             return res.status(200).json({
                 result : true,
                 message : 'OK',
-                data: usc_result.dataValues
+                data: usp_result.dataValues
             });
         }else{
             return res.status(404).json({
@@ -57,28 +81,30 @@ module.exports = {
         }
     },
     
-    updateUSC: async function(req, res){
+    updateUSP: async function(req, res){
         /* PARAMS */
-        let uscid = req.params.uscid;
+        let uspid = req.params.uspid;
         
-        let name = req.body.name;
-        let description = req.body.description;
+        let user_subscription_categoryid = req.body.user_subscription_categoryid;
+        let type = req.body.type;
+        let price = req.body.price;
         
         /* PARAMETER ZSequelize  */
-        let usc_value = {
-            name: name,
-            description: description
+        let usp_value = {
+            user_subscription_categoryid: user_subscription_categoryid,
+            type: type,
+            price: price
         }
         
-        let usc_where = {
-            id: uscid
+        let usp_where = {
+            id: uspid
         };
         
         try {
             transaction = await sequelize.transaction();
             
             /* UPDATE ZSequelize */
-            let usc_result = await ZSequelize.updateValues(usc_value, usc_where, "UserSubscriptionCategoryModel", transaction);
+            let usp_result = await ZSequelize.updateValues(usp_value, usp_where, "UserSubscriptionPriceModel", transaction);
             
             await transaction.commit();
             
@@ -96,21 +122,23 @@ module.exports = {
         }
     },
     
-    insertUSC: async function(req, res){
+    insertUSP: async function(req, res){
         /* BODY */
-        let name = req.body.name;
-        let description = req.body.description;
-        
+        let user_subscription_categoryid = req.body.user_subscription_categoryid;
+        let type = req.body.type;
+        let price = req.body.price;
+
         /* VALIDATION */
         /* PARAMETER ZSequelize */
         let validation_field = ['*'];
         let validation_where = {
-            name: name
+            user_subscription_categoryid: user_subscription_categoryid,
+            type: type
         };
         
         let validation_orderBy = [['id', 'DESC']];
         let validation_groupBy = false;
-        let validation_model = 'UserSubscriptionCategoryModel';
+        let validation_model = 'UserSubscriptionPriceModel';
         
         /* FETCH ZSequelize */
         let validation_accountData = await ZSequelize.fetch(false, validation_field, validation_where, validation_orderBy, validation_groupBy, validation_model);
@@ -123,15 +151,16 @@ module.exports = {
         }
         
         /* PARAMETER ZSequelize  */
-        let usc_value = {
-            name: name,
-            description: description
+        let usp_value = {
+            user_subscription_categoryid: user_subscription_categoryid,
+            type: type,
+            price: price
         }
         
         try {
             transaction = await sequelize.transaction();
             /* INSERT ZSequelize */
-            let usc_result = await ZSequelize.insertValues(usc_value, "UserSubscriptionCategoryModel", transaction);
+            let usp_result = await ZSequelize.insertValues(usp_value, "UserSubscriptionPriceModel", transaction);
             
             await transaction.commit();
             
@@ -149,18 +178,18 @@ module.exports = {
         }
     },
     
-    deleteUSC: async function(req, res){
+    deleteUSP: async function(req, res){
         /* PARAMS */
-        let uscid = req.params.uscid;
+        let uspid = req.params.uspid;
         
-        let usc_where = {
-            id: uscid
+        let usp_where = {
+            id: uspid
         };
         
         /* UPDATE ZSequelize */
-        let usc_result = await ZSequelize.destroyValues(usc_where, "UserSubscriptionCategoryModel");
+        let usp_result = await ZSequelize.destroyValues(usp_where, "UserSubscriptionPriceModel");
         
-        if (usc_result) {
+        if (usp_result) {
             /* FETCTH RESULT & CONDITION & RESPONSE */
             return res.status(201).json({
                 result : true,

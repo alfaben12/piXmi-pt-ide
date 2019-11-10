@@ -37,7 +37,7 @@ module.exports = {
         let groupBy = false;
         let model = 'ShelterModel'
 
-        let shelter_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let shelter_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
 		if (shelter_result.result) {

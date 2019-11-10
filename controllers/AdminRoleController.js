@@ -37,7 +37,7 @@ module.exports = {
         let groupBy = false;
         let model = 'AdminRoleModel'
 
-        let role_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let role_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
 		if (role_result.result) {

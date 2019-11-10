@@ -40,7 +40,7 @@ module.exports = {
         let groupBy = false;
         let model = 'VoucherModel'
         
-        let voucher_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let voucher_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
         
         /* FETCTH RESULT & CONDITION & RESPONSE */
         if (voucher_result.result) {

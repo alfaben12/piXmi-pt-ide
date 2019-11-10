@@ -16,6 +16,7 @@ const AdminRouter = require('./routes/AdminRouter');
 const AdminRoleRouter = require('./routes/AdminRoleRouter');
 const UserRouter = require('./routes/UserRouter');
 const UserSubscriptionCategoryRouter = require('./routes/UserSubscriptionCategoryRouter');
+const UserSubscriptionPriceRouter = require('./routes/UserSubscriptionPriceRouter');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/admins', AdminRouter);
 app.use('/adminroles', AdminRoleRouter);
 app.use('/users', UserRouter);
 app.use('/usc', UserSubscriptionCategoryRouter);
+app.use('/usp', UserSubscriptionPriceRouter);
 
 app.get('/a', (req, res, next) => {
     res.send({ name: 'what', status: 'yesss' });

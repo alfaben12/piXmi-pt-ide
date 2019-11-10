@@ -37,7 +37,7 @@ module.exports = {
         let groupBy = false;
         let model = 'TransportationTypeModel'
 
-        let transportation_type_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let transportation_type_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
 		if (transportation_type_result.result) {

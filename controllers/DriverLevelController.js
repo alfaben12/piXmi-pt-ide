@@ -37,7 +37,7 @@ module.exports = {
         let groupBy = false;
         let model = 'DriverLevelModel'
 
-        let level_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let level_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
 		if (level_result.result) {
