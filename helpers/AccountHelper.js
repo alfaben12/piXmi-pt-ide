@@ -79,9 +79,21 @@ exports.getUserAccount = async function(accountid) {
 	let orderBy = false;
 	let groupBy = false;
 	let model = 'UserModel';
-
+	let joins = [
+		[
+			{
+				'fromModel' : 'UserModel',
+				'fromKey' : 'user.id',
+				'bridgeType' : 'hasOne',
+				'toModel' : 'UserSubscriptionSetupModel',
+				'toKey' : 'userid',
+				'attributes' : ['*'],
+				'required': false
+			}
+		]
+	];
 	/* FETCH ZSequelize */
-	let accountData = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
+	let accountData = await ZSequelize.fetchJoins(false, field, where, orderBy, groupBy, model, joins);
 	return accountData;
 };
 

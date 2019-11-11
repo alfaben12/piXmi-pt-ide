@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_payment', {
+    'driver_payment_voucher', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,

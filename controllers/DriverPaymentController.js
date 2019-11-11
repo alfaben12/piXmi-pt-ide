@@ -140,7 +140,7 @@ module.exports = {
         try {
             transaction = await sequelize.transaction();
             /* INSERT ZSequelize */
-            await ZSequelize.insertValues(driver_value, "DriverPaymentModel", transaction);
+            await ZSequelize.insertValues(driver_value, "DriverPaymentVoucherModel", transaction);
             await ZSequelize.insertValues(voucher_value, "VoucherUsedModel", transaction);
             
             await transaction.commit();
@@ -176,7 +176,7 @@ module.exports = {
 
 		let validation_payment_orderBy = [['id', 'DESC']];
 		let validation_payment_groupBy = false;
-		let validation_payment_model = 'DriverPaymentModel';
+		let validation_payment_model = 'DriverPaymentVoucherModel';
 
 		/* FETCH ZSequelize */
         let validation_payment = await ZSequelize.fetch(false, validation_payment_field, validation_payment_where, validation_payment_orderBy, validation_payment_groupBy, validation_payment_model);
@@ -233,7 +233,7 @@ module.exports = {
 
             /* UPDATE ZSequelize */
             await ZSequelize.insertValues(mutation_value, "DriverMutationPointModel", transaction);
-            await ZSequelize.updateValues(payment_value, payment_where, "DriverPaymentModel", transaction);
+            await ZSequelize.updateValues(payment_value, payment_where, "DriverPaymentVoucherModel", transaction);
             await ZSequelize.updateValues(account_value, account_where, "DriverModel", transaction);
 
             await transaction.commit();
@@ -289,7 +289,7 @@ module.exports = {
         };
         let orderBy = [['id', 'DESC']];
         let groupBy = false;
-        let model = 'DriverPaymentModel'
+        let model = 'DriverPaymentVoucherModel'
 
         let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 
@@ -319,7 +319,7 @@ module.exports = {
         };
         let orderBy = [['id', 'DESC']];
         let groupBy = false;
-        let model = 'DriverPaymentModel'
+        let model = 'DriverPaymentVoucherModel'
 
         let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
 

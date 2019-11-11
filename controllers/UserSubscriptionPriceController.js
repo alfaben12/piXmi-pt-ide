@@ -88,12 +88,16 @@ module.exports = {
         let user_subscription_categoryid = req.body.user_subscription_categoryid;
         let type = req.body.type;
         let price = req.body.price;
+        let name = req.body.name;
+        let day_expired = req.body.day_expired;
         
         /* PARAMETER ZSequelize  */
         let usp_value = {
             user_subscription_categoryid: user_subscription_categoryid,
             type: type,
-            price: price
+            price: price,
+            name: name,
+            day_expired: day_expired
         }
         
         let usp_where = {
@@ -127,6 +131,8 @@ module.exports = {
         let user_subscription_categoryid = req.body.user_subscription_categoryid;
         let type = req.body.type;
         let price = req.body.price;
+        let name = req.body.name;
+        let day_expired = req.body.day_expired;
 
         /* VALIDATION */
         /* PARAMETER ZSequelize */
@@ -154,7 +160,9 @@ module.exports = {
         let usp_value = {
             user_subscription_categoryid: user_subscription_categoryid,
             type: type,
-            price: price
+            price: price,
+            name: name,
+            day_expired: day_expired
         }
         
         try {

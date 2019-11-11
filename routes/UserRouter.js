@@ -9,4 +9,10 @@ router.post(
 	UserController.verifyUser
 );
 
+router.post(
+    '/uss',
+    JWT.JWTverify,
+	UserController.USS
+);
+
 module.exports = router;

@@ -10,6 +10,9 @@ const Model = sequelize.define(
             primaryKey: true,
             autoIncrement: true
         },
+        name: {
+            type: Sequelize.TEXT
+        },
         user_subscription_categoryid: {
             type: Sequelize.INTEGER,
         },
@@ -17,6 +20,9 @@ const Model = sequelize.define(
             type: Sequelize.ENUM('WEEKLY', 'MONTHLY', 'ANNUALLY')
         },
         price: {
+            type: Sequelize.INTEGER
+        },
+        day_expired: {
             type: Sequelize.INTEGER
         },
         createdAt: {
