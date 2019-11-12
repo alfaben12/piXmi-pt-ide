@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_mutation', {
+    'user_mutation', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,

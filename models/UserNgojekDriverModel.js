@@ -4,14 +4,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_mutation', {
+    'user_mutation', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
-        ngojekid: {
-            type: Sequelize.INTEGER
         },
         userid: {
             type: Sequelize.INTEGER
@@ -19,14 +16,29 @@ const Model = sequelize.define(
         driverid: {
             type: Sequelize.INTEGER
         },
-        credit: {
-            type: Sequelize.INTEGER
+        transaction_number: {
+            type: Sequelize.TEXT
         },
-        debit: {
-            type: Sequelize.INTEGER
+        pickup_address:{
+            type: Sequelize.TEXT
         },
-        balance: {
-            type: Sequelize.INTEGER
+        pickup_point:{
+            type: Sequelize.TEXT
+        },
+        destination_address:{
+            type: Sequelize.TEXT
+        },
+        destination_point:{
+            type: Sequelize.TEXT
+        },
+        distance: {
+            type: Sequelize.DOUBLE
+        },
+        total: {
+            type: Sequelize.DOUBLE
+        },
+        destination_point:{
+            type: Sequelize.STRING(50)
         },
         createdAt: {
             type: 'TIMESTAMP',

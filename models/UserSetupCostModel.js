@@ -4,28 +4,28 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'driver_mutation', {
+    'user_setup_cost', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        ngojekid: {
-            type: Sequelize.INTEGER
-        },
         userid: {
             type: Sequelize.INTEGER
         },
-        driverid: {
+        adminid: {
             type: Sequelize.INTEGER
         },
-        credit: {
+        from_hour: {
             type: Sequelize.INTEGER
         },
-        debit: {
+        to_hour: {
             type: Sequelize.INTEGER
         },
-        balance: {
+        price: {
+            type: Sequelize.INTEGER
+        },
+        point: {
             type: Sequelize.INTEGER
         },
         createdAt: {

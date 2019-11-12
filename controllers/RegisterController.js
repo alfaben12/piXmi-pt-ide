@@ -20,7 +20,7 @@ module.exports = {
         let ktp_number = req.body.ktp_number;
         let phone = req.body.phone;
         let email = req.body.email;
-
+        
         /* VALIDATION */
         /* PARAMETER ZSequelize */
         let validation_field = ['*'];
@@ -41,79 +41,79 @@ module.exports = {
                 message: "Maaf, email/username sudah terdaftar"
             });
         }
-
+        
         let prefixFileName = moment().format('YYYYxMMDD')
-
+        
         ba64, data_url = req.body.photo_profile;
         let photo_profile = "photo_profile"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_profile);
         let filename_photo_profile = "photo_profile"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_profile, data_url);
-
+        
         let fileSize_photo_profile = GlobalHelper.getFileSize(req.body.photo_profile)
-
+        
         if (fileSize_photo_profile > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         ba64, data_url = req.body.photo_stnk;
         let photo_stnk = "photo_stnk"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_stnk);
         let filename_photo_stnk = "photo_stnk"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_stnk, data_url);
-
+        
         let fileSize_photo_stnk = GlobalHelper.getFileSize(req.body.photo_stnk)
-
+        
         if (fileSize_photo_stnk > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         ba64, data_url = req.body.photo_skck;
         let photo_skck = "photo_skck"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_skck);
         let filename_photo_skck = "photo_skck"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_skck, data_url);
-
+        
         let fileSize_photo_skck = GlobalHelper.getFileSize(req.body.photo_skck)
-
+        
         if (fileSize_photo_skck > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         ba64, data_url = req.body.photo_sim;
         let photo_sim = "photo_sim"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_sim);
         let filename_photo_sim = "photo_sim"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_sim, data_url);
-
+        
         let fileSize_photo_sim = GlobalHelper.getFileSize(req.body.photo_sim)
-
+        
         if (fileSize_photo_sim > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         ba64, data_url = req.body.photo_transportation;
         let photo_transportation = "photo_transportation"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_transportation);
         let filename_photo_transportation = "photo_transportation"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_transportation, data_url);
         
         let fileSize_photo_transportation = GlobalHelper.getFileSize(req.body.photo_transportation)
-
+        
         if (fileSize_photo_transportation > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         /* PARAMETER ZSequelize  */
         let driver_value = {
             name: name,
@@ -186,21 +186,21 @@ module.exports = {
         }
         
         let prefixFileName = moment().format('YYYYxMMDD')
-
+        
         ba64, data_url = req.body.photo_profile;
         let photo_profile = "photo_profile"+ prefixFileName +"."+ GlobalHelper.getMime(req.body.photo_profile);
         let filename_photo_profile = "photo_profile"+ prefixFileName;
         ba64.writeImageSync("uploads/images/" + filename_photo_profile, data_url);
-
+        
         let fileSize = GlobalHelper.getFileSize(req.body.photo_profile)
-
+        
         if (fileSize > 1000) {
             return res.status(413).json({
                 result : false,
                 message: "Maaf, File terlalu besar max size file adalah 1MB"
             });
         }
-
+        
         /* PARAMETER ZSequelize  */
         let driver_value = {
             name: name,
@@ -216,14 +216,64 @@ module.exports = {
         try {
             transaction = await sequelize.transaction();
             /* INSERT ZSequelize */
-            await ZSequelize.insertValues(driver_value, "UserModel", transaction);
+            let dataRes = await ZSequelize.insertValues(driver_value, "UserModel", transaction);
             
+            let userid = dataRes.record.id;
+            
+            let user_cost_list = [
+                {
+                    "userid": userid,
+                    "from_hour": 1,
+                    "to_hour": 7,
+                    "price": 6000,
+                    "point": 6
+                },
+                {
+                    "userid": userid,
+                    "from_hour": 7,
+                    "to_hour": 11,
+                    "price": 2000,
+                    "point": 2
+                },
+                {
+                    "userid": userid,
+                    "from_hour": 11,
+                    "to_hour": 16,
+                    "price": 3000,
+                    "point": 3
+                },
+                {
+                    "userid": userid,
+                    "from_hour": 16,
+                    "to_hour": 20,
+                    "price": 4000,
+                    "point": 4
+                },
+                {
+                    "userid": userid,
+                    "from_hour": 20,
+                    "to_hour": 24,
+                    "price": 5000,
+                    "point": 5
+                }
+            ];
+
+            for (let i = 0; i < user_cost_list.length; i++) {
+                let user_cost = {
+                    userid: userid,
+                    from_hour: user_cost_list[i].from_hour,
+                    to_hour: user_cost_list[i].to_hour,
+                    price: user_cost_list[i].price,
+                    point: user_cost_list[i].point
+                }
+                await ZSequelize.insertValues(user_cost, "UserSetupCostModel", transaction);
+            }
             await transaction.commit();
             
             /* FETCTH RESULT & CONDITION & RESPONSE */
             return res.status(201).json({
                 result : true,
-                message : 'OK'
+                message : 'Berhasil, Silahkan Login'
             });
         } catch (err) {
             await transaction.rollback();
@@ -286,22 +336,22 @@ module.exports = {
         const accountSid = 'AC5f5a33217cbd07b15e276bca1610b401';
         const authToken = '44fd1d9fd12e89d483894b15295fa8f2';
         const client = require('twilio')(accountSid, authToken);
-
+        
         /* JWT PAYLOAD */
         let accountid = req.payload.accountid;
-
+        
         let token = GlobalHelper.randomCharacter(5);
-
+        
         /* PARAMETER ZSequelize  */
         let account_value = {
             token: token,
             is_verify: 1
         }
-
+        
         let account_where = {
             id: accountid
         };
-
+        
         try {
             transaction = await sequelize.transaction();
             
@@ -309,12 +359,12 @@ module.exports = {
             let account_result = await ZSequelize.updateValues(account_value, account_where, "DriverModel", transaction);
             
             let account = await AccountHelper.getDriverAccount(accountid);
-
+            
             let phone = account.dataValues.phone;
             client.messages
-                .create({body: 'PIXMI code '+ token + ".", from: '+12242698055', to: phone})
-                .then(message => console.log(message.sid));
-
+            .create({body: 'PIXMI code '+ token + ".", from: '+12242698055', to: phone})
+            .then(message => console.log(message.sid));
+            
             await transaction.commit();
             
             /* FETCTH RESULT & CONDITION & RESPONSE */
