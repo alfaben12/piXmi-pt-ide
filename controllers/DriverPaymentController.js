@@ -321,7 +321,7 @@ module.exports = {
         let groupBy = false;
         let model = 'DriverPaymentVoucherModel'
 
-        let payment_result = await ZSequelize.fetch(true, field, where, orderBy, groupBy, model);
+        let payment_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
 
         /* FETCTH RESULT & CONDITION & RESPONSE */
 		if (payment_result.result) {

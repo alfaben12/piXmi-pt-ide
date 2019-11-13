@@ -2,41 +2,46 @@ const express = require('express');
 const router = express.Router();
 const JWTAuthUser = require('../middlewares/user/JWT');
 const JWTAuthDriver = require('../middlewares/driver/JWT');
-const TransactionController = require('../controllers/TransactionController');
+const TransactionController = require('../controllers/NgojekController');
 
 router.post(
-    '/ngojek',
+    '/',
     JWTAuthUser.JWTverify,
 	TransactionController.ngojek
 );
 
 router.post(
-    '/ngojek/pickup',
+    '/pickup',
     JWTAuthDriver.JWTverify,
 	TransactionController.pickup
 );
 
 router.post(
-    '/ngojek/otw',
+    '/otw',
     JWTAuthDriver.JWTverify,
 	TransactionController.otw
 );
 
 router.post(
-    '/ngojek/finish',
+    '/finish',
     JWTAuthDriver.JWTverify,
 	TransactionController.finish
 );
 
 router.post(
-    '/ngojek/useract',
+    '/useract',
     JWTAuthUser.JWTverify,
 	TransactionController.userAct
 );
 
 router.post(
-    '/ngojek/driveract',
+    '/driveract',
     JWTAuthDriver.JWTverify,
 	TransactionController.driverAct
+);
+
+router.get(
+    '/:transaction_number',
+	TransactionController.getTransaction
 );
 module.exports = router;

@@ -419,5 +419,33 @@ module.exports = {
                 message : err
             });
         }
+    },
+
+    getTransaction: async function(req, res){
+		let transaction_number = req.params.transaction_number;
+
+        let field = ['*'];
+        let where = {
+            transaction_number: transaction_number
+        };
+        let orderBy = [['id', 'DESC']];
+        let groupBy = false;
+        let model = 'UserNgojekDriverModel'
+
+        let payment_result = await ZSequelize.fetch(false, field, where, orderBy, groupBy, model);
+
+        /* FETCTH RESULT & CONDITION & RESPONSE */
+		if (payment_result.result) {
+			return res.status(200).json({
+                result : true,
+                message : 'OK',
+				data: payment_result.dataValues
+			});
+		}else{
+			return res.status(404).json({
+				result : false,
+                message : 'Gagal, pembayaran dengan no transaksi '+ transaction_number + ' tidak ditemukan' 
+			});
+		}
     }
 }
