@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const Model = sequelize.define(
-    'user_mutation', {
+    'user_ngojek_driver', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -35,10 +35,13 @@ const Model = sequelize.define(
             type: Sequelize.DOUBLE
         },
         total: {
-            type: Sequelize.DOUBLE
+            type: Sequelize.INTEGER
         },
-        destination_point:{
+        status:{
             type: Sequelize.STRING(50)
+        },
+        cancelled_by: {
+            type: Sequelize.TEXT
         },
         createdAt: {
             type: 'TIMESTAMP',

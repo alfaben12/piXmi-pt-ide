@@ -28,6 +28,9 @@ const Model = sequelize.define(
         balance: {
             type: Sequelize.INTEGER
         },
+        payment_type: {
+            type: Sequelize.TEXT
+        },
         createdAt: {
             type: 'TIMESTAMP',
             defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
